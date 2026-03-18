@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 import { useToast } from './use-toast';
+import { HabitFrequency } from '@/types/flywheel';
 
 export interface Habit {
   id: string;
@@ -9,11 +10,23 @@ export interface Habit {
   description?: string;
   energy_value: number;
   color?: string;
-  binding_reward_id?: string;
+  binding_reward_id?: string | null;
+  frequency?: HabitFrequency;
+  target_count?: number;
   is_archived: boolean;
   created_at: string;
   updated_at: string;
 }
+
+export type HabitMutation = Omit<Habit, 'id' | 'created_at' | 'updated_at'>;
+
+const hasMissingColumnError = (error: unknown) => {
+  const message = typeof error === 'object' && error !== null && 'message' in error
+    ? String(error.message)
+    : '';
+
+  return /column|schema cache/i.test(message);
+};
 
 export const useHabits = () => {
   const [habits, setHabits] = useState<Habit[]>([]);
@@ -22,7 +35,7 @@ export const useHabits = () => {
   const { toast } = useToast();
 
   // 获取习惯列表
-  const fetchHabits = async () => {
+  const fetchHabits = useCallback(async () => {
     if (!user) return;
 
     try {
@@ -43,18 +56,41 @@ export const useHabits = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast, user]);
 
   // 创建习惯
-  const createHabit = async (habitData: Omit<Habit, 'id' | 'created_at' | 'updated_at'>) => {
+  const createHabit = async (habitData: HabitMutation) => {
     if (!user) return;
 
     try {
-      const { data, error } = await supabase
+      const payload = {
+        ...habitData,
+        frequency: habitData.frequency ?? 'daily',
+        target_count: habitData.target_count ?? 1,
+        user_id: user.id,
+      };
+
+      let { data, error } = await supabase
         .from('habits')
-        .insert([{ ...habitData, user_id: user.id }])
+        .insert([payload])
         .select()
         .single();
+
+      if (error && hasMissingColumnError(error)) {
+        ({ data, error } = await supabase
+          .from('habits')
+          .insert([{
+            name: habitData.name,
+            description: habitData.description,
+            energy_value: habitData.energy_value,
+            color: habitData.color,
+            binding_reward_id: habitData.binding_reward_id,
+            is_archived: habitData.is_archived,
+            user_id: user.id,
+          }])
+          .select()
+          .single());
+      }
 
       if (error) throw error;
       
@@ -80,12 +116,22 @@ export const useHabits = () => {
     if (!user) return;
 
     try {
-      const { data, error } = await supabase
+      let { data, error } = await supabase
         .from('habits')
         .update(updates)
         .eq('id', id)
         .select()
         .single();
+
+      if (error && hasMissingColumnError(error)) {
+        const { frequency, target_count, ...legacyUpdates } = updates;
+        ({ data, error } = await supabase
+          .from('habits')
+          .update(legacyUpdates)
+          .eq('id', id)
+          .select()
+          .single());
+      }
 
       if (error) throw error;
       
@@ -178,14 +224,27 @@ export const useHabits = () => {
       }
 
       // 记录打卡
-      const { error: completionError } = await supabase
+      let { error: completionError } = await supabase
         .from('habit_completions')
         .insert([{
           user_id: user.id,
           habit_id: habitId,
+          plan_id_snapshot: habit.binding_reward_id ?? null,
+          frequency_bucket: habit.frequency ?? 'daily',
           energy_gained: habit.energy_value,
           completed_at: new Date().toISOString()
         }]);
+
+      if (completionError && hasMissingColumnError(completionError)) {
+        ({ error: completionError } = await supabase
+          .from('habit_completions')
+          .insert([{
+            user_id: user.id,
+            habit_id: habitId,
+            energy_gained: habit.energy_value,
+            completed_at: new Date().toISOString()
+          }]));
+      }
 
       if (completionError) throw completionError;
 
@@ -488,7 +547,7 @@ export const useHabits = () => {
       setHabits([]);
       setLoading(false);
     }
-  }, [user]);
+  }, [fetchHabits, user]);
 
   return {
     habits,

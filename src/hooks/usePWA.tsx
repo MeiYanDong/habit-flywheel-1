@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
+interface NavigatorWithStandalone extends Navigator {
+  standalone?: boolean;
+}
+
 export interface PWAStatus {
   isOffline: boolean;
   needRefresh: boolean;
@@ -59,7 +63,7 @@ export const usePWA = () => {
       }
       
       // 检查iOS Safari的standalone模式
-      if ((window.navigator as any).standalone === true) {
+      if ((window.navigator as NavigatorWithStandalone).standalone === true) {
         setIsInstalled(true);
         return;
       }

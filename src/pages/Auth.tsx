@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
 import { Loader2, Mail, Lock, CheckCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Auth = () => {
   const [loading, setLoading] = useState(false);
@@ -18,6 +19,7 @@ const Auth = () => {
   const [isProcessingAuth, setIsProcessingAuth] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // 处理邮箱确认回调
@@ -38,8 +40,8 @@ const Auth = () => {
           if (error) throw error;
           
           toast({
-            title: "邮箱验证成功",
-            description: "您的账户已成功激活，欢迎使用习惯飞轮！",
+            title: t('auth.emailVerificationSuccess'),
+            description: t('auth.emailVerificationSuccessDesc'),
           });
           
           // 清除URL中的认证参数
@@ -50,8 +52,8 @@ const Auth = () => {
         } catch (error) {
           console.error('Authentication callback error:', error);
           toast({
-            title: "验证失败",
-            description: "邮箱验证失败，请重试登录",
+            title: t('auth.verificationFailed'),
+            description: t('auth.verificationFailedDesc'),
             variant: "destructive",
           });
         } finally {
@@ -70,14 +72,14 @@ const Auth = () => {
 
     handleAuthCallback();
     checkUser();
-  }, [navigate, toast]);
+  }, [navigate, t, toast]);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast({
-        title: "密码不匹配",
-        description: "请确保两次输入的密码相同",
+        title: t('auth.passwordMismatch'),
+        description: t('auth.passwordMismatchDesc'),
         variant: "destructive",
       });
       return;
@@ -96,14 +98,14 @@ const Auth = () => {
 
     if (error) {
       toast({
-        title: "注册失败",
+        title: t('auth.signUpFailed'),
         description: error.message,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "注册成功",
-        description: "请检查您的邮箱并点击确认链接完成注册",
+        title: t('auth.signUpSuccess'),
+        description: t('auth.signUpSuccessDesc'),
       });
     }
     setLoading(false);
@@ -120,14 +122,14 @@ const Auth = () => {
 
     if (error) {
       toast({
-        title: "登录失败",
+        title: t('auth.signInFailed'),
         description: error.message,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "登录成功",
-        description: "欢迎回到习惯飞轮！",
+        title: t('auth.signInSuccess'),
+        description: t('auth.signInSuccessDesc'),
       });
       navigate('/app');
     }
@@ -137,12 +139,12 @@ const Auth = () => {
   // 如果正在处理认证回调，显示处理中状态
   if (isProcessingAuth) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-amber-50 dark:from-purple-900/20 dark:to-amber-900/20 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
+      <div className="editorial-shell flex min-h-screen items-center justify-center p-4">
+        <Card className="surface-panel w-full max-w-md">
           <CardContent className="flex flex-col items-center justify-center p-8">
-            <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
-            <h2 className="text-xl font-semibold mb-2">验证中...</h2>
-            <p className="text-gray-600 text-center mb-4">正在验证您的邮箱，请稍候</p>
+            <CheckCircle className="mb-4 h-16 w-16 text-[hsl(var(--redeemed))]" />
+            <h2 className="text-xl font-semibold mb-2">{t('auth.verifying')}</h2>
+            <p className="mb-4 text-center text-muted-foreground">{t('auth.verifyingDesc')}</p>
             <Loader2 className="h-6 w-6 animate-spin" />
           </CardContent>
         </Card>
@@ -151,30 +153,30 @@ const Auth = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-amber-50 dark:from-purple-900/20 dark:to-amber-900/20 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md">
+    <div className="editorial-shell flex min-h-screen items-center justify-center p-4">
+      <Card className="surface-panel w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="text-4xl mb-4">🌟</div>
-          <CardTitle className="text-2xl">习惯飞轮</CardTitle>
-          <p className="text-gray-600 dark:text-gray-400">让每一份努力都精准浇灌你的目标</p>
+          <div className="mb-4 text-4xl">✦</div>
+          <CardTitle className="editorial-display text-3xl">{t('auth.title')}</CardTitle>
+          <p className="text-muted-foreground">{t('auth.subtitle')}</p>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">登录</TabsTrigger>
-              <TabsTrigger value="signup">注册</TabsTrigger>
+            <TabsList className="grid h-auto w-full grid-cols-2 rounded-2xl border border-border/70 bg-[hsl(var(--background)/0.72)] p-1">
+              <TabsTrigger value="signin">{t('auth.signIn')}</TabsTrigger>
+              <TabsTrigger value="signup">{t('auth.signUp')}</TabsTrigger>
             </TabsList>
             
             <TabsContent value="signin">
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">邮箱</Label>
+                  <Label htmlFor="email">{t('auth.email')}</Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="email"
                       type="email"
-                      placeholder="your@email.com"
+                      placeholder={t('auth.emailPlaceholder')}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
@@ -183,13 +185,13 @@ const Auth = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">密码</Label>
+                  <Label htmlFor="password">{t('auth.password')}</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="password"
                       type="password"
-                      placeholder="输入密码"
+                      placeholder={t('auth.passwordPlaceholder')}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10"
@@ -197,9 +199,9 @@ const Auth = () => {
                     />
                   </div>
                 </div>
-                <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600" disabled={loading}>
+                <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  登录
+                  {t('auth.signIn')}
                 </Button>
               </form>
             </TabsContent>
@@ -207,13 +209,13 @@ const Auth = () => {
             <TabsContent value="signup">
               <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">邮箱</Label>
+                  <Label htmlFor="signup-email">{t('auth.email')}</Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="signup-email"
                       type="email"
-                      placeholder="your@email.com"
+                      placeholder={t('auth.emailPlaceholder')}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
@@ -222,13 +224,13 @@ const Auth = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">密码</Label>
+                  <Label htmlFor="signup-password">{t('auth.password')}</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="signup-password"
                       type="password"
-                      placeholder="创建密码（至少6位）"
+                      placeholder={t('auth.createPasswordPlaceholder')}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10"
@@ -238,13 +240,13 @@ const Auth = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="confirm-password">确认密码</Label>
+                  <Label htmlFor="confirm-password">{t('auth.confirmPassword')}</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="confirm-password"
                       type="password"
-                      placeholder="再次输入密码"
+                      placeholder={t('auth.confirmPasswordPlaceholder')}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className="pl-10"
@@ -252,9 +254,9 @@ const Auth = () => {
                     />
                   </div>
                 </div>
-                <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600" disabled={loading}>
+                <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  注册
+                  {t('auth.signUp')}
                 </Button>
               </form>
             </TabsContent>

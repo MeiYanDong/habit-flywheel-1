@@ -42,11 +42,11 @@ const FilterToolbar: React.FC<FilterToolbarProps> = ({
     <div className={cn("space-y-4", className)}>
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="flex-1">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+          <h2 className="editorial-display mb-2 text-2xl font-semibold">
             {title}
           </h2>
           {description && (
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-muted-foreground">
               {description}
             </p>
           )}
@@ -77,7 +77,7 @@ const FilterToolbar: React.FC<FilterToolbarProps> = ({
                   onClick={action.onClick}
                   className={cn(
                     "transition-all duration-200 hover:shadow-lg",
-                    action.variant === 'default' && "bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600",
+                    action.variant === 'default' && "bg-primary text-primary-foreground hover:bg-primary/90",
                     action.className
                   )}
                 >

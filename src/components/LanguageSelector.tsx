@@ -10,11 +10,11 @@ const LanguageSelector: React.FC = () => {
 
   return (
     <div className="space-y-2">
-      <Label htmlFor="language" className="dark:text-gray-200">
+      <Label htmlFor="language">
         {t('settings.language')}
       </Label>
       <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-        <SelectTrigger id="language" className="dark:border-gray-600">
+        <SelectTrigger id="language">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -25,7 +25,7 @@ const LanguageSelector: React.FC = () => {
           ))}
         </SelectContent>
       </Select>
-      <p className="text-sm text-gray-600 dark:text-gray-400">
+      <p className="text-sm text-muted-foreground">
         {t('settings.languageDesc')}
       </p>
     </div>

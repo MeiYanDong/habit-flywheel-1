@@ -1,14 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { EnhancedSelect } from '@/components/ui/enhanced-select';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
 import { BarChart3, Calendar, TrendingUp, Zap, CheckCircle, Clock, CalendarDays, Archive } from 'lucide-react';
 import { useHabits } from '@/hooks/useHabits';
 import { useHabitCompletions, TimeRange } from '@/hooks/useHabitCompletions';
+import { useTranslation } from 'react-i18next';
 
 const HistoryView: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [timeRange, setTimeRange] = useState<TimeRange>('week');
   const [selectedHabit, setSelectedHabit] = useState<string>('all');
   
@@ -125,13 +125,13 @@ const HistoryView: React.FC = () => {
       const dayStats = stats.dailyStats[dateStr] || { completions: 0, energy: 0 };
       days.push({
         date: dateStr,
-        day: date.toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' }),
+        day: date.toLocaleDateString(i18n.language, { month: 'numeric', day: 'numeric' }),
         completions: dayStats.completions,
         energy: dayStats.energy
       });
     }
     return days;
-  }, [stats.dailyStats]);
+  }, [i18n.language, stats.dailyStats]);
 
   // 时间范围变化处理（优化：添加预加载提示）
   const handleTimeRangeChange = (newRange: TimeRange) => {
@@ -149,21 +149,21 @@ const HistoryView: React.FC = () => {
       <div className="w-full max-w-none overflow-x-hidden">
         <div className="space-y-6 pt-6 p-2 sm:p-4 lg:px-0">
           <div className="text-center">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">历史记录</h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              {cacheInfo.hasData(timeRange) ? '从缓存加载中...' : '正在加载数据...'}
+            <h2 className="editorial-display mb-2 text-2xl font-semibold">{t('flywheel.historyView.title')}</h2>
+            <p className="text-muted-foreground">
+              {cacheInfo.hasData(timeRange) ? t('flywheel.historyView.loadingFromCache') : t('common.loading')}
             </p>
           </div>
           
           {/* 优化的骨架屏 */}
           <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4 md:gap-4">
             {[1, 2, 3, 4].map(i => (
-              <Card key={i} className="min-w-0 dark:bg-gray-800 dark:border-gray-700">
+              <Card key={i} className="surface-panel min-w-0">
                 <CardContent className="p-2 sm:p-3 md:p-4 text-center">
                   <div className="animate-pulse">
-                    <div className="h-6 w-6 bg-gray-300 dark:bg-gray-600 rounded mx-auto mb-2"></div>
-                    <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-1"></div>
-                    <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                    <div className="mx-auto mb-2 h-6 w-6 rounded bg-muted"></div>
+                    <div className="mb-1 h-4 rounded bg-muted"></div>
+                    <div className="h-3 rounded bg-muted"></div>
                   </div>
                 </CardContent>
               </Card>
@@ -172,8 +172,8 @@ const HistoryView: React.FC = () => {
           
           {/* 显示缓存状态（开发模式下） */}
           {process.env.NODE_ENV === 'development' && (
-            <div className="text-xs text-gray-500 text-center">
-              缓存状态: {cacheInfo.size} 个时间范围已缓存
+            <div className="text-center text-xs text-muted-foreground">
+              {t('flywheel.historyView.cacheStatus', { count: cacheInfo.size })}
             </div>
           )}
         </div>
@@ -181,21 +181,13 @@ const HistoryView: React.FC = () => {
     );
   }
 
-  const getTimeRangeText = () => {
-    switch (timeRange) {
-      case 'week': return '最近一周';
-      case 'month': return '最近一月';
-      case 'all': return '全部时间';
-    }
-  };
-
   return (
     <div className="w-full max-w-none overflow-x-hidden">
       {/* 移动端全宽容器 */}
       <div className="space-y-6 pt-6 p-2 sm:p-4 lg:px-0">
         <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">历史记录</h2>
-          <p className="text-gray-600 dark:text-gray-400">回顾成长轨迹，数据见证努力</p>
+          <h2 className="editorial-display mb-2 text-2xl font-semibold">{t('flywheel.historyView.title')}</h2>
+          <p className="text-muted-foreground">{t('flywheel.historyView.description')}</p>
         </div>
 
         {/* 筛选器 - 移动端优化 */}
@@ -206,25 +198,25 @@ const HistoryView: React.FC = () => {
             options={[
               {
                 value: 'week',
-                label: '最近一周',
+                label: t('flywheel.historyView.range.week'),
                 icon: <Clock className="h-4 w-4" />,
-                description: '查看最近7天的数据'
+                description: t('flywheel.historyView.range.weekDescription')
               },
               {
                 value: 'month',
-                label: '最近一月',
+                label: t('flywheel.historyView.range.month'),
                 icon: <CalendarDays className="h-4 w-4" />,
-                description: '查看最近30天的数据'
+                description: t('flywheel.historyView.range.monthDescription')
               },
               {
                 value: 'all',
-                label: '全部时间',
+                label: t('flywheel.historyView.range.all'),
                 icon: <Archive className="h-4 w-4" />,
-                description: '查看所有历史数据'
+                description: t('flywheel.historyView.range.allDescription')
               }
             ]}
             width="w-full sm:w-44"
-            placeholder="选择时间范围"
+            placeholder={t('flywheel.historyView.range.placeholder')}
           />
 
           <EnhancedSelect
@@ -233,79 +225,79 @@ const HistoryView: React.FC = () => {
             options={[
               {
                 value: 'all',
-                label: '全部习惯',
+                label: t('flywheel.historyView.allHabits'),
                 icon: <CheckCircle className="h-4 w-4" />,
                 count: transformedHabits.length,
-                description: '显示所有习惯的数据'
+                description: t('flywheel.historyView.allHabitsDescription')
               },
               ...transformedHabits.map(habit => ({
                 value: habit.id,
                 label: habit.name,
                 icon: <Zap className="h-4 w-4" />,
-                description: `查看 ${habit.name} 的历史数据`
+                description: t('flywheel.historyView.habitHistoryDescription', { name: habit.name })
               }))
             ]}
             width="w-full sm:w-48"
-            placeholder="选择习惯"
+            placeholder={t('flywheel.historyView.habitPlaceholder')}
           />
         </div>
 
         {/* 显示数据状态信息 */}
         {transformedCompletions.length === 0 && (
-          <Card className="dark:bg-gray-800 dark:border-gray-700">
-            <CardContent className="p-6 text-center">
-              <Calendar className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">暂无历史记录</h3>
-              <p className="text-gray-600 dark:text-gray-400">开始完成习惯打卡，这里将显示您的成长轨迹</p>
-            </CardContent>
-          </Card>
-        )}
+            <Card className="surface-panel-compat">
+              <CardContent className="p-6 text-center">
+                <Calendar className="mx-auto mb-4 h-12 w-12 text-[hsl(var(--ink-soft))]" />
+                <h3 className="mb-2 text-lg font-medium">{t('flywheel.historyView.emptyTitle')}</h3>
+                <p className="text-muted-foreground">{t('flywheel.historyView.emptyDescription')}</p>
+              </CardContent>
+            </Card>
+          )}
 
         {/* 统计卡片 - 移动端2x2布局 */}
         {transformedCompletions.length > 0 && (
           <>
             <div className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4 md:gap-4">
-              <Card className="min-w-0 dark:bg-gray-800 dark:border-gray-700">
+              <Card className="metric-panel min-w-0">
                 <CardContent className="p-2 sm:p-3 md:p-4 text-center">
-                  <CheckCircle className="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 mx-auto mb-1 sm:mb-2 text-green-600 dark:text-green-400" />
-                  <div className="text-sm sm:text-lg md:text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">{stats.totalCompletions}</div>
-                  <div className="text-xs sm:text-xs md:text-sm text-gray-600 dark:text-gray-400">总完成次数</div>
+                  <CheckCircle className="mx-auto mb-1 h-4 w-4 text-[hsl(var(--redeemed))] sm:mb-2 sm:h-6 sm:w-6 md:h-8 md:w-8" />
+                  <div className="truncate text-sm font-bold sm:text-lg md:text-2xl">{stats.totalCompletions}</div>
+                  <div className="text-xs text-muted-foreground sm:text-xs md:text-sm">{t('flywheel.historyView.stats.totalCompletions')}</div>
                 </CardContent>
               </Card>
 
-              <Card className="min-w-0 dark:bg-gray-800 dark:border-gray-700">
+              <Card className="metric-panel min-w-0">
                 <CardContent className="p-2 sm:p-3 md:p-4 text-center">
-                  <Zap className="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 mx-auto mb-1 sm:mb-2 text-amber-500" />
-                  <div className="text-sm sm:text-lg md:text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">{stats.totalEnergy}</div>
-                  <div className="text-xs sm:text-xs md:text-sm text-gray-600 dark:text-gray-400">总获得能量</div>
+                  <Zap className="mx-auto mb-1 h-4 w-4 text-[hsl(var(--brass))] sm:mb-2 sm:h-6 sm:w-6 md:h-8 md:w-8" />
+                  <div className="truncate text-sm font-bold text-[hsl(var(--brass))] sm:text-lg md:text-2xl">{stats.totalEnergy}</div>
+                  <div className="text-xs text-muted-foreground sm:text-xs md:text-sm">{t('flywheel.historyView.stats.totalEnergy')}</div>
                 </CardContent>
               </Card>
 
-              <Card className="min-w-0 dark:bg-gray-800 dark:border-gray-700">
+              <Card className="metric-panel min-w-0">
                 <CardContent className="p-2 sm:p-3 md:p-4 text-center">
-                  <Calendar className="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 mx-auto mb-1 sm:mb-2 text-purple-600 dark:text-purple-400" />
-                  <div className="text-sm sm:text-lg md:text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">{stats.uniqueDays}</div>
-                  <div className="text-xs sm:text-xs md:text-sm text-gray-600 dark:text-gray-400">活跃天数</div>
+                  <Calendar className="mx-auto mb-1 h-4 w-4 text-primary sm:mb-2 sm:h-6 sm:w-6 md:h-8 md:w-8" />
+                  <div className="truncate text-sm font-bold sm:text-lg md:text-2xl">{stats.uniqueDays}</div>
+                  <div className="text-xs text-muted-foreground sm:text-xs md:text-sm">{t('flywheel.historyView.stats.activeDays')}</div>
                 </CardContent>
               </Card>
 
-              <Card className="min-w-0 dark:bg-gray-800 dark:border-gray-700">
+              <Card className="metric-panel min-w-0">
                 <CardContent className="p-2 sm:p-3 md:p-4 text-center">
-                  <TrendingUp className="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 mx-auto mb-1 sm:mb-2 text-blue-600 dark:text-blue-400" />
-                  <div className="text-sm sm:text-lg md:text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">
+                  <TrendingUp className="mx-auto mb-1 h-4 w-4 text-primary sm:mb-2 sm:h-6 sm:w-6 md:h-8 md:w-8" />
+                  <div className="truncate text-sm font-bold sm:text-lg md:text-2xl">
                     {stats.uniqueDays > 0 ? Math.round(stats.totalCompletions / stats.uniqueDays * 10) / 10 : 0}
                   </div>
-                  <div className="text-xs sm:text-xs md:text-sm text-gray-600 dark:text-gray-400">日均完成</div>
+                  <div className="text-xs text-muted-foreground sm:text-xs md:text-sm">{t('flywheel.historyView.stats.dailyAverage')}</div>
                 </CardContent>
               </Card>
             </div>
 
             {/* 折线图趋势 - 移动端优化 */}
-            <Card className="w-full min-w-0 dark:bg-gray-800 dark:border-gray-700">
+            <Card className="surface-panel w-full min-w-0">
               <CardHeader className="pb-2 sm:pb-3 md:pb-6">
-                <CardTitle className="flex items-center space-x-2 text-sm sm:text-base md:text-lg text-gray-900 dark:text-gray-100">
-                  <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-purple-600 dark:text-purple-400" />
-                  <span>最近7天趋势</span>
+                <CardTitle className="flex items-center space-x-2 text-sm sm:text-base md:text-lg">
+                  <BarChart3 className="h-3 w-3 text-primary sm:h-4 sm:w-4 md:h-5 md:w-5" />
+                  <span>{t('flywheel.historyView.chart.title')}</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0 px-2 sm:px-6">
@@ -317,54 +309,55 @@ const HistoryView: React.FC = () => {
                         dataKey="day" 
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 10, fill: '#6B7280' }}
-                        className="text-xs dark:fill-gray-400"
+                        tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }}
+                        className="text-xs"
                       />
                       <YAxis 
                         axisLine={false}
                         tickLine={false}
-                        tick={{ fontSize: 10, fill: '#6B7280' }}
-                        className="text-xs dark:fill-gray-400"
+                        tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }}
+                        className="text-xs"
                       />
                         <Tooltip 
                           contentStyle={{
-                            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                            border: '1px solid #e5e7eb',
+                            backgroundColor: 'hsl(var(--card) / 0.96)',
+                            border: '1px solid hsl(var(--border))',
                             borderRadius: '8px',
+                            color: 'hsl(var(--foreground))',
                             fontSize: '12px'
                           }}
                       />
                       <Line 
                         type="monotone" 
                         dataKey="completions" 
-                          stroke="#8b5cf6"
+                          stroke="hsl(var(--primary))"
                         strokeWidth={2}
-                          dot={{ fill: '#8b5cf6', strokeWidth: 1, r: 3 }}
-                          activeDot={{ r: 4, stroke: '#8b5cf6', strokeWidth: 2 }}
+                          dot={{ fill: 'hsl(var(--primary))', strokeWidth: 1, r: 3 }}
+                          activeDot={{ r: 4, stroke: 'hsl(var(--primary))', strokeWidth: 2 }}
                       />
                       <Line 
                         type="monotone" 
                         dataKey="energy" 
-                          stroke="#f59e0b"
+                          stroke="hsl(var(--brass))"
                         strokeWidth={2}
-                          dot={{ fill: '#f59e0b', strokeWidth: 1, r: 3 }}
-                          activeDot={{ r: 4, stroke: '#f59e0b', strokeWidth: 2 }}
+                          dot={{ fill: 'hsl(var(--brass))', strokeWidth: 1, r: 3 }}
+                          activeDot={{ r: 4, stroke: 'hsl(var(--brass))', strokeWidth: 2 }}
                         strokeDasharray="3 3"
                       />
                     </LineChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
-                <div className="text-center text-xs sm:text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-2 md:mt-4">
-                  实线表示完成次数，虚线表示获得能量
+                <div className="mt-1 text-center text-xs text-muted-foreground sm:mt-2 sm:text-xs md:mt-4 md:text-sm">
+                  {t('flywheel.historyView.chart.legend')}
                 </div>
               </CardContent>
             </Card>
 
             {/* 习惯排行 - 移动端优化 */}
-            <Card className="w-full min-w-0 dark:bg-gray-800 dark:border-gray-700">
+            <Card className="surface-panel w-full min-w-0">
               <CardHeader className="pb-2 sm:pb-3 md:pb-6">
-                <CardTitle className="text-sm sm:text-base md:text-lg text-gray-900 dark:text-gray-100">习惯完成排行</CardTitle>
+                <CardTitle className="text-sm sm:text-base md:text-lg">{t('flywheel.historyView.rankingTitle')}</CardTitle>
               </CardHeader>
               <CardContent className="pt-0 px-2 sm:px-6">
                 <div className="space-y-2 md:space-y-3">
@@ -376,25 +369,25 @@ const HistoryView: React.FC = () => {
                       if (!habit) return null;
 
                       return (
-                        <div key={habitId} className="flex items-center justify-between p-2 sm:p-3 ranking-item rounded-lg min-w-0 bg-gray-50 dark:bg-gray-700 border dark:border-gray-600">
+                        <div key={habitId} className="ranking-item flex min-w-0 items-center justify-between rounded-lg p-2 sm:p-3">
                           <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
                             <div className={`w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0 ${
-                              index === 0 ? 'bg-yellow-500' : 
-                              index === 1 ? 'bg-gray-400' : 
-                              index === 2 ? 'bg-amber-600' : 'bg-gray-300'
+                              index === 0 ? 'bg-[hsl(var(--brass))]' : 
+                              index === 1 ? 'bg-[hsl(var(--primary)/0.72)]' : 
+                              index === 2 ? 'bg-[hsl(var(--validating))]' : 'bg-[hsl(var(--wish)/0.72)]'
                             }`}>
                               {index + 1}
                             </div>
-                            <span className="font-medium text-xs sm:text-sm md:text-base truncate text-gray-900 dark:text-gray-100">{habit.name}</span>
+                            <span className="truncate text-xs font-medium sm:text-sm md:text-base">{habit.name}</span>
                           </div>
                           <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 text-xs sm:text-xs md:text-sm flex-shrink-0">
                             <div className="text-center">
-                              <div className="font-bold text-gray-900 dark:text-gray-100">{habitStat.completions}</div>
-                              <div className="text-gray-500 dark:text-gray-400">次数</div>
+                              <div className="font-bold">{habitStat.completions}</div>
+                              <div className="text-muted-foreground">{t('flywheel.historyView.completions')}</div>
                             </div>
                             <div className="text-center">
-                              <div className="font-bold text-gray-900 dark:text-gray-100">{habitStat.energy}</div>
-                              <div className="text-gray-500 dark:text-gray-400">能量</div>
+                              <div className="font-bold">{habitStat.energy}</div>
+                              <div className="text-muted-foreground">{t('common.energy')}</div>
                             </div>
                           </div>
                         </div>

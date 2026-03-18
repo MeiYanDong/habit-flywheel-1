@@ -112,8 +112,8 @@ const HabitForm: React.FC<HabitFormProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
+      <DialogContent className="dialog-shell dialog-shell--legacy sm:max-w-[425px]">
+        <DialogHeader className="border-b border-border/70 pb-4">
           <DialogTitle>
             {isEditing ? t('habits.edit') : t('habits.create')}
           </DialogTitle>
@@ -191,8 +191,8 @@ const HabitForm: React.FC<HabitFormProps> = ({
                         onClick={() => field.onChange('daily')}
                         className={`flex-1 px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
                           field.value === 'daily'
-                            ? 'bg-purple-600 text-white border-purple-600 shadow-sm'
-                            : 'bg-white text-gray-700 border-gray-300 hover:border-purple-400 hover:bg-purple-50'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background text-foreground border-border hover:border-[hsl(var(--primary)/0.4)] hover:bg-[hsl(var(--muted)/0.52)]'
                         }`}
                       >
                         {t('habits.daily')}
@@ -202,8 +202,8 @@ const HabitForm: React.FC<HabitFormProps> = ({
                         onClick={() => field.onChange('weekly')}
                         className={`flex-1 px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
                           field.value === 'weekly'
-                            ? 'bg-purple-600 text-white border-purple-600 shadow-sm'
-                            : 'bg-white text-gray-700 border-gray-300 hover:border-purple-400 hover:bg-purple-50'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background text-foreground border-border hover:border-[hsl(var(--primary)/0.4)] hover:bg-[hsl(var(--muted)/0.52)]'
                         }`}
                       >
                         {t('habits.weekly')}
@@ -213,8 +213,8 @@ const HabitForm: React.FC<HabitFormProps> = ({
                         onClick={() => field.onChange('monthly')}
                         className={`flex-1 px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
                           field.value === 'monthly'
-                            ? 'bg-purple-600 text-white border-purple-600 shadow-sm'
-                            : 'bg-white text-gray-700 border-gray-300 hover:border-purple-400 hover:bg-purple-50'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-sm'
+                            : 'bg-background text-foreground border-border hover:border-[hsl(var(--primary)/0.4)] hover:bg-[hsl(var(--muted)/0.52)]'
                         }`}
                       >
                         {t('habits.monthly')}
@@ -281,10 +281,10 @@ const HabitForm: React.FC<HabitFormProps> = ({
             />
 
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={handleClose}>
+              <Button type="button" variant="outline" className="btn-subtle" onClick={handleClose}>
                 {t('habits.cancel')}
               </Button>
-              <Button type="submit" className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600">
+              <Button type="submit">
                 {isEditing ? t('habits.save') : t('habits.create_action')}
               </Button>
             </DialogFooter>

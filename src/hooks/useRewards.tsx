@@ -1,8 +1,8 @@
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 import { useToast } from './use-toast';
+import { PlanStatus, PlanType } from '@/types/flywheel';
 
 export interface Reward {
   id: string;
@@ -12,9 +12,26 @@ export interface Reward {
   current_energy: number;
   is_redeemed: boolean;
   redeemed_at?: string;
+  plan_type?: PlanType;
+  status?: PlanStatus;
+  target_date?: string;
+  motivation_note?: string;
+  abandon_reason?: string;
+  reflection_note?: string;
+  priority?: number;
   created_at: string;
   updated_at: string;
 }
+
+export type RewardMutation = Omit<Reward, 'id' | 'current_energy' | 'is_redeemed' | 'created_at' | 'updated_at'>;
+
+const hasMissingColumnError = (error: unknown) => {
+  const message = typeof error === 'object' && error !== null && 'message' in error
+    ? String(error.message)
+    : '';
+
+  return /column|schema cache/i.test(message);
+};
 
 export const useRewards = () => {
   const [rewards, setRewards] = useState<Reward[]>([]);
@@ -23,7 +40,7 @@ export const useRewards = () => {
   const { toast } = useToast();
 
   // 获取奖励列表
-  const fetchRewards = async () => {
+  const fetchRewards = useCallback(async () => {
     if (!user) return;
 
     try {
@@ -44,23 +61,43 @@ export const useRewards = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast, user]);
 
   // 创建奖励
-  const createReward = async (rewardData: Omit<Reward, 'id' | 'current_energy' | 'is_redeemed' | 'created_at' | 'updated_at'>) => {
+  const createReward = async (rewardData: RewardMutation) => {
     if (!user) return;
 
     try {
-      const { data, error } = await supabase
+      const payload = { 
+        ...rewardData, 
+        user_id: user.id,
+        current_energy: 0,
+        is_redeemed: false,
+        plan_type: rewardData.plan_type ?? 'one_time',
+        status: rewardData.status ?? 'active',
+        priority: rewardData.priority ?? 0,
+      };
+
+      let { data, error } = await supabase
         .from('rewards')
-        .insert([{ 
-          ...rewardData, 
-          user_id: user.id,
-          current_energy: 0,
-          is_redeemed: false
-        }])
+        .insert([payload])
         .select()
         .single();
+
+      if (error && hasMissingColumnError(error)) {
+        ({ data, error } = await supabase
+          .from('rewards')
+          .insert([{
+            name: rewardData.name,
+            description: rewardData.description,
+            energy_cost: rewardData.energy_cost,
+            user_id: user.id,
+            current_energy: 0,
+            is_redeemed: false,
+          }])
+          .select()
+          .single());
+      }
 
       if (error) throw error;
       
@@ -86,12 +123,31 @@ export const useRewards = () => {
     if (!user) return;
 
     try {
-      const { data, error } = await supabase
+      let { data, error } = await supabase
         .from('rewards')
         .update(updates)
         .eq('id', id)
         .select()
         .single();
+
+      if (error && hasMissingColumnError(error)) {
+        const {
+          plan_type,
+          status,
+          target_date,
+          motivation_note,
+          abandon_reason,
+          reflection_note,
+          priority,
+          ...legacyUpdates
+        } = updates;
+        ({ data, error } = await supabase
+          .from('rewards')
+          .update(legacyUpdates)
+          .eq('id', id)
+          .select()
+          .single());
+      }
 
       if (error) throw error;
       
@@ -203,7 +259,7 @@ export const useRewards = () => {
       setRewards([]);
       setLoading(false);
     }
-  }, [user]);
+  }, [fetchRewards, user]);
 
   // 乐观更新：立即增加奖励能量
   const optimisticAddEnergyToReward = (rewardId: string, energyAmount: number) => {

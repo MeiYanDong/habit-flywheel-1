@@ -12,26 +12,35 @@ export type Database = {
       habit_completions: {
         Row: {
           completed_at: string
+          evidence_type: string | null
           energy_gained: number
           habit_id: string
           id: string
           notes: string | null
+          frequency_bucket: string | null
+          plan_id_snapshot: string | null
           user_id: string
         }
         Insert: {
           completed_at?: string
+          evidence_type?: string | null
           energy_gained?: number
           habit_id: string
           id?: string
           notes?: string | null
+          frequency_bucket?: string | null
+          plan_id_snapshot?: string | null
           user_id: string
         }
         Update: {
           completed_at?: string
+          evidence_type?: string | null
           energy_gained?: number
           habit_id?: string
           id?: string
           notes?: string | null
+          frequency_bucket?: string | null
+          plan_id_snapshot?: string | null
           user_id?: string
         }
         Relationships: [
@@ -40,6 +49,13 @@ export type Database = {
             columns: ["habit_id"]
             isOneToOne: false
             referencedRelation: "habits"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "habit_completions_plan_id_snapshot_fkey"
+            columns: ["plan_id_snapshot"]
+            isOneToOne: false
+            referencedRelation: "rewards"
             referencedColumns: ["id"]
           },
         ]
@@ -51,9 +67,11 @@ export type Database = {
           created_at: string
           description: string | null
           energy_value: number
+          frequency: string
           id: string
           is_archived: boolean
           name: string
+          target_count: number
           updated_at: string
           user_id: string
         }
@@ -63,9 +81,11 @@ export type Database = {
           created_at?: string
           description?: string | null
           energy_value?: number
+          frequency?: string
           id?: string
           is_archived?: boolean
           name: string
+          target_count?: number
           updated_at?: string
           user_id: string
         }
@@ -75,9 +95,11 @@ export type Database = {
           created_at?: string
           description?: string | null
           energy_value?: number
+          frequency?: string
           id?: string
           is_archived?: boolean
           name?: string
+          target_count?: number
           updated_at?: string
           user_id?: string
         }
@@ -93,42 +115,108 @@ export type Database = {
       }
       rewards: {
         Row: {
+          abandon_reason: string | null
           created_at: string
           current_energy: number
           description: string | null
           energy_cost: number
           id: string
           is_redeemed: boolean
+          motivation_note: string | null
           name: string
+          plan_type: string
+          priority: number
           redeemed_at: string | null
+          reflection_note: string | null
+          status: string
+          target_date: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          abandon_reason?: string | null
           created_at?: string
           current_energy?: number
           description?: string | null
           energy_cost?: number
           id?: string
           is_redeemed?: boolean
+          motivation_note?: string | null
           name: string
+          plan_type?: string
+          priority?: number
           redeemed_at?: string | null
+          reflection_note?: string | null
+          status?: string
+          target_date?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          abandon_reason?: string | null
           created_at?: string
           current_energy?: number
           description?: string | null
           energy_cost?: number
           id?: string
           is_redeemed?: boolean
+          motivation_note?: string | null
           name?: string
+          plan_type?: string
+          priority?: number
           redeemed_at?: string | null
+          reflection_note?: string | null
+          status?: string
+          target_date?: string | null
           updated_at?: string
           user_id?: string
         }
         Relationships: []
+      }
+      reward_bindings: {
+        Row: {
+          allocation_mode: string
+          allocation_ratio: number
+          created_at: string
+          habit_id: string
+          id: string
+          reward_id: string
+          user_id: string
+        }
+        Insert: {
+          allocation_mode?: string
+          allocation_ratio?: number
+          created_at?: string
+          habit_id: string
+          id?: string
+          reward_id: string
+          user_id: string
+        }
+        Update: {
+          allocation_mode?: string
+          allocation_ratio?: number
+          created_at?: string
+          habit_id?: string
+          id?: string
+          reward_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reward_bindings_habit_id_fkey"
+            columns: ["habit_id"]
+            isOneToOne: false
+            referencedRelation: "habits"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reward_bindings_reward_id_fkey"
+            columns: ["reward_id"]
+            isOneToOne: false
+            referencedRelation: "rewards"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_energy: {
         Row: {

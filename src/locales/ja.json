@@ -164,10 +164,433 @@
     "resetSuccess": "デフォルトにリセット",
     "resetSuccessDesc": "アプリがデフォルト状態にリセットされ、サンプルデータが復元されました",
     "dataBackupTip": "データエクスポート機能は、すべての習慣、報酬、完了記録をJSONファイルとして保存します。定期的なバックアップをお勧めします。",
+    "compatibilityLab": "実験と互換性",
+    "compatibilityLabDesc": "reward-first が既定の体験になり、旧モジュールは移行期間中のみここから使えます。",
+    "openLegacyWorkspace": "互換ワークスペースを開く",
+    "compatibilityNote": "互換モードは引き続き利用可能です",
+    "compatibilityNoteDesc": "旧版の習慣・報酬・バインド・履歴ビューは削除せず、互換ワークスペースに集約して移行中の利用を維持しています。",
+    "rewardFirstMode": "現在の既定モード: reward-first",
     "appInfo": "アプリ情報",
     "version": "バージョン",
     "lastUpdate": "最終更新",
-    "developer": "開発者"
+    "developer": "開発者",
+    "vnextPreview": "vNext Preview"
+  },
+  "vnextShell": {
+    "description": "ただモジュールを管理するのではなく、本当に欲しい報酬を行動で充電します。",
+    "createPlan": "報酬プランを作成",
+    "milestone": "マイルストーン",
+    "viewPlan": "プランを見る",
+    "dismissMilestone": "あとで見る",
+    "nav": {
+      "dashboard": "Dashboard",
+      "dashboardShort": "ダッシュ",
+      "plans": "Plans",
+      "plansShort": "プラン",
+      "review": "Review",
+      "reviewShort": "振り返り",
+      "library": "Library",
+      "libraryShort": "蓄積",
+      "settings": "Settings",
+      "settingsShort": "設定"
+    }
+  },
+  "flywheel": {
+    "planStatus": {
+      "wish": "欲しい",
+      "validating": "検証中",
+      "active": "進行中",
+      "readyToRedeem": "交換可能",
+      "redeemed": "交換済み",
+      "abandoned": "中止済み"
+    },
+    "planType": {
+      "oneTime": "単発ゴール",
+      "repeatable": "繰り返し報酬"
+    },
+    "frequency": {
+      "daily": "毎日",
+      "weekly": "毎週",
+      "monthly": "毎月"
+    },
+    "dashboard": {
+      "badge": "Reward-first Dashboard",
+      "heroEmptyTitle": "最初の報酬プランを作成してフライホイールを回し始めましょう",
+      "heroEmptyDescription": "本当に欲しい報酬をプランに変え、行動でそれが交換に値するかを証明します。",
+      "distanceToRedeem": "交換までの残り",
+      "currentStatus": "現在の状態: {{status}}",
+      "actionMix": "行動構成",
+      "actionMixHint": "1サイクルの最大前進量 {{energy}} ⚡",
+      "createFirstPlan": "最初の報酬プランを作成",
+      "todayActionsCompleted": "今日の行動完了",
+      "todayActionsHint": "今日やる価値が最も高い行動を、影響度順に並べています。",
+      "activePlans": "アクティブなプラン数",
+      "activePlansHint": "進行中・検証中・交換可能なプランを含みます。",
+      "lifetimeEnergy": "累計グローバルエネルギー",
+      "lifetimeEnergyHint": "長期的な投入量と成長を示す指標です。",
+      "todayActionsTitle": "Today Actions",
+      "todayActionsDescription": "現在の報酬プランを最も前進させる行動から取りかかります。",
+      "newPlan": "新しいプラン",
+      "noTodayActions": "実行可能な行動はまだありません。報酬プランを作成すると、今日やるべき項目がここに自動で表示されます。",
+      "impactBadge": "影響 {{impact}}",
+      "bucket": {
+        "week": "今週 {{current}}/{{target}}",
+        "month": "今月 {{current}}/{{target}}",
+        "day": "今日 {{current}}/{{target}}"
+      },
+      "energyGain": "今回 +{{energy}} ⚡",
+      "advancesReward": "完了すると「{{reward}}」を直接前進させます。残り {{remaining}} 回",
+      "unassignedPlan": "まだプランに紐づいていません。プラン詳細で取り込めます。",
+      "rollbackProgress": "今回の前進を戻す",
+      "completeAndAdvance": "完了して前進",
+      "validationSignalsTitle": "Validation Signals",
+      "validationSignalsDescription": "最近どの欲求が検証・交換・整理されたかを示します。",
+      "recentRedeemed": "最近完了したプラン",
+      "recentAbandoned": "最近見送った欲求",
+      "recentFocusArea": "最近もっとも投入した領域",
+      "none": "まだありません",
+      "startPlan": "先にプランを始めましょう",
+      "topPlansTitle": "Top Plans",
+      "topPlansDescription": "交換に最も近い目標を優先して見ます。"
+    },
+    "plans": {
+      "title": "Plans",
+      "description": "報酬とバインドを別々のモジュールで扱うのではなく、報酬プラン視点で目標を管理します。",
+      "createPlan": "報酬プランを作成",
+      "groupCount": "{{count}} 件のプラン",
+      "emptyGroup": "この状態のプランはまだありません。",
+      "actionAndRecentProgress": "{{count}} 件の行動 · 最終前進 {{date}}",
+      "targetDate": "目標日: {{date}}",
+      "noTargetDate": "未設定",
+      "noRecentProgress": "まだありません"
+    },
+    "review": {
+      "title": "Review",
+      "description": "ここは単なる統計ではありません。最近誰のために投資していたか、どの欲求を追い続けるべきかを見ます。",
+      "range": {
+        "week": "直近1週間",
+        "month": "直近1か月"
+      },
+      "view": {
+        "plans": "プラン視点",
+        "habits": "習慣視点"
+      },
+      "stats": {
+        "totalCompletions": "総完了回数",
+        "totalPlans": "プラン総数",
+        "validatingPlans": "検証中",
+        "filteredPlans": "整理された欲求"
+      },
+      "energyTrend": {
+        "title": "エネルギー推移",
+        "description": "時間軸で最近の投入密度の変化を確認します。"
+      },
+      "rankings": {
+        "plansTitle": "報酬前進ランキング",
+        "habitsTitle": "習慣貢献ランキング",
+        "plansDescription": "どの目標が最も多くの行動とエネルギーを吸収しているか。",
+        "habitsDescription": "どの行動が本当に目標を前に進めたか。",
+        "planMeta": "{{count}} 回の行動 · {{status}}",
+        "habitMeta": "{{completions}} 回完了 · {{energy}} ⚡",
+        "bound": "プランに紐づき済み",
+        "unbound": "未紐づき"
+      },
+      "summary": {
+        "title": "検証結果の要約",
+        "description": "交換済みと中止済みの欲求が、あなたの判断システムを形作ります。",
+        "validated": "検証成功",
+        "filtered": "整理された欲求"
+      },
+      "validated": {
+        "title": "価値が証明された報酬",
+        "description": "行動によって交換に値すると証明された目標です。",
+        "empty": "交換済みプランはまだありません。",
+        "meta": "{{count}} 回の行動 · 累計 {{current}} / {{target}} ⚡"
+      },
+      "filtered": {
+        "title": "整理された欲求",
+        "description": "失敗ではなく、有効な欲求の明確化です。",
+        "empty": "現在、中止したプランはありません。",
+        "meta": "停止前に {{count}} 回行動 · 現在の進捗 {{progress}}%"
+      }
+    },
+    "library": {
+      "title": "Library",
+      "description": "完了済み・中止済み・アーカイブ済みの内容を蓄積し、現在の実行層をすっきり保ちます。",
+      "archivedPlans": {
+        "title": "完了済み / 中止済みプラン",
+        "description": "これらの結果自体が「欲求検証」の記録です。",
+        "empty": "蓄積されたプランはまだありません。",
+        "meta": "{{status}} · {{count}} 回の行動",
+        "view": "表示"
+      },
+      "archivedHabits": {
+        "title": "アーカイブ習慣",
+        "description": "現在のフライホイールには参加しませんが、将来のテンプレートや振り返りの根拠として残します。",
+        "empty": "アーカイブ習慣はまだありません。",
+        "meta": "毎回 +{{energy}} ⚡ · {{frequency}} / {{count}}"
+      },
+      "repeatableTemplates": {
+        "title": "繰り返し報酬テンプレート",
+        "description": "すでに検証済みの繰り返し報酬を、ゼロから設定し直さず次のサイクルへ複製します。",
+        "empty": "再利用できる繰り返し報酬テンプレートはまだありません。",
+        "meta": "{{count}} 件の行動テンプレート · {{status}}",
+        "duplicate": "1ラウンド複製"
+      },
+      "habitTemplates": {
+        "title": "汎用習慣テンプレート",
+        "description": "アーカイブは破棄ではありません。良い行動パターンは素早く再利用できるべきです。",
+        "empty": "再利用できる習慣テンプレートはまだありません。",
+        "meta": "{{frequency}} / {{count}} · 毎回 +{{energy}} ⚡",
+        "revive": "アクティブ習慣として複製"
+      },
+      "recommendations": {
+        "title": "おすすめテンプレート枠",
+        "description": "将来の厳選テンプレートやプラン複製導線のための領域です。今は自分の蓄積を優先します。",
+        "placeholder": "次はここにシステムテンプレート、コミュニティテンプレート、ワンクリック複製などを追加できます。"
+      }
+    },
+    "planComposer": {
+      "steps": {
+        "rewardDefinition": "報酬定義",
+        "rewardType": "報酬タイプ",
+        "motivationGoal": "動機と目標",
+        "bindActions": "行動を紐づけ",
+        "confirmPlan": "プラン確認"
+      },
+      "rewardName": "ステップ1: 報酬名を入力",
+      "rewardNamePlaceholder": "例: GPT Plus にアップグレード / プッシュアップボードを買う",
+      "energyCost": "必要エネルギー",
+      "description": "プラン説明",
+      "descriptionPlaceholder": "これはどんな報酬で、交換すると何を意味するか",
+      "planType": "ステップ2: 報酬タイプを選択",
+      "initialStatus": "初期状態",
+      "motivation": "ステップ3: 動機を書く",
+      "motivationPlaceholder": "なぜ追う価値があるのか？ 一時的な衝動ではないとどう判断するか？",
+      "targetDate": "目標日",
+      "priority": "優先度",
+      "actionsTitle": "ステップ4: 行動を設定",
+      "actionsDescription": "新しい行動を作成することも、既存の習慣をこのプランに取り込むこともできます。",
+      "addAction": "行動を追加",
+      "selectExistingAction": "既存の習慣から選択",
+      "addExistingAction": "プランに取り込む",
+      "actionBadge": "行動 {{index}}",
+      "fromLibrary": "習慣ライブラリから",
+      "actionName": "行動名",
+      "actionNamePlaceholder": "例: 毎週 O3 の会話枠を使い切る",
+      "actionEnergy": "1回あたりの前進エネルギー",
+      "frequency": "頻度",
+      "targetCount": "目標回数",
+      "actionDescription": "行動説明",
+      "actionDescriptionPlaceholder": "後で曖昧なチェックインにならないよう、完了基準を書きます。",
+      "confirmTitle": "ステップ5: プラン確認",
+      "confirmDescription": "報酬定義、状態、行動構成が妥当かを確認します。",
+      "summaryReward": "報酬",
+      "summaryRewardMeta": "目標 {{energy}} ⚡ · 期限 {{date}}",
+      "summaryActions": "行動構成",
+      "summaryActionCount": "{{count}} 件の行動",
+      "summaryActionItem": "{{name}} · {{frequency}} · {{count}} 回 · +{{energy}} ⚡",
+      "noSupplementaryNote": "補足説明はまだありません。",
+      "dialogTitle": "報酬プランを作成",
+      "dialogDescription": "まず欲しいものを定義し、それを実行可能な行動に分解します。",
+      "previous": "前へ",
+      "next": "次へ",
+      "creating": "作成中...",
+      "create": "報酬プランを作成",
+      "unset": "未設定"
+    },
+    "planDetail": {
+      "dialogDescription": "報酬を通常の交換記録ではなく、ひとつのプランとして運用します。",
+      "currentStatus": "現在の状態",
+      "redeemProgress": "交換進捗",
+      "rhythmSummary": "リズム要約",
+      "boundActionCount": "紐づいた行動: {{count}}",
+      "totalCompletions": "累計完了: {{count}}",
+      "targetDate": "目標日: {{date}}",
+      "unset": "未設定",
+      "descriptionTitle": "プラン説明",
+      "motivationTitle": "動機メモ",
+      "notFilled": "未入力",
+      "bindingTitle": "紐づいた行動",
+      "bindingDescription": "すべての紐づいた行動をここで管理し、別のバインド画面へは飛びません。",
+      "selectExistingHabit": "既存の習慣を選択",
+      "bind": "紐づける",
+      "emptyBinding": "まだ行動が紐づいていません。報酬を具体的な行動に分解してからフライホイールが本当に回り始めます。",
+      "boundHabitMeta": "{{frequency}} · 目標 {{count}} 回 · 毎回 +{{energy}} ⚡",
+      "unbind": "解除",
+      "statusActions": "状態操作",
+      "markReadyToRedeem": "交換可能にする",
+      "redeemReward": "報酬を交換",
+      "abandonPlan": "プランを中止",
+      "recentProgress": "最近の前進",
+      "noRecentProgress": "前進記録はまだありません。",
+      "deletedAction": "削除された行動",
+      "completionMeta": "+{{energy}} ⚡ · {{date}}",
+      "close": "閉じる"
+    },
+    "redeemDialog": {
+      "title": "報酬交換の確認",
+      "description": "交換は単なるクリックではなく、この一連の行動を正式に精算する行為です。",
+      "rewardName": "報酬名",
+      "actionCount": "行動回数",
+      "boundActions": "紐づいた行動",
+      "latestProgress": "最近の前進",
+      "noDate": "まだありません",
+      "actionSources": "この報酬を生んだ行動",
+      "actionSourceMeta": "毎回 +{{energy}} ⚡",
+      "validatedWindow": "{{start}} から今日まで、この報酬は十分な行動によって証明されました。",
+      "insufficientEnergy": "現在のエネルギーはまだ足りません。もう少し前進してから交換してください。",
+      "later": "今は交換しない",
+      "confirm": "交換を確定"
+    },
+    "abandonDialog": {
+      "title": "プランを中止",
+      "description": "中止は失敗ではなく、この報酬に今はこれ以上投資する価値がないと確認することです。",
+      "currentPlan": "現在のプラン",
+      "currentPlanMeta": "{{count}} 回の行動を投入 · 進捗 {{progress}}%",
+      "reason": "中止理由",
+      "reasonPlaceholder": "例: 試してみた結果、本当の必要性が弱かった / 興味が移った / 目標が変わった",
+      "reflection": "今回何を学んだか",
+      "reflectionPlaceholder": "失敗ラベルだけを残すのではなく、有効な欲求フィルターとして記録します。",
+      "confirm": "中止を確定"
+    },
+    "legacyWorkspace": {
+      "title": "互換ワークスペース",
+      "description": "vNext は報酬プラン中心ですが、移行期間のため旧版の習慣・報酬・バインド・履歴モジュールもここに残しています。",
+      "tabs": {
+        "overview": "概要",
+        "forms": "旧フォーム",
+        "bindings": "旧バインド",
+        "history": "旧履歴"
+      },
+      "migrationAdvice": {
+        "title": "移行の提案",
+        "primaryFlow": "基本フローとして `Dashboard / Plans / Review / Library` を優先して使います。",
+        "quickEntry": "習慣や報酬をすばやく追加したいだけなら、旧フォームも引き続き使えます。",
+        "compatibilityOnly": "旧バインドと旧履歴は互換ビューとしてのみ残り、今後はプラン詳細と Review に段階的に置き換わります。"
+      },
+      "compatibilityCapabilities": {
+        "title": "現在の互換機能",
+        "habitForm": "旧版習慣フォーム",
+        "rewardForm": "旧版報酬フォーム",
+        "bindingManager": "旧版バインド管理",
+        "bindingManagerHint": "「旧バインド」タブを見る",
+        "historyView": "旧版履歴ビュー",
+        "historyViewHint": "「旧履歴」タブを見る"
+      },
+      "open": "開く",
+      "forms": {
+        "habitEntryTitle": "旧版習慣入口",
+        "habitEntryDescription": "習慣の直接作成はまだ可能で、既存報酬への紐づけもできます。この入口は互換レイヤーに降格しています。",
+        "createHabit": "習慣を作成",
+        "rewardEntryTitle": "旧版報酬入口",
+        "rewardEntryDescription": "報酬の直接作成もまだ可能ですが、推奨ルートは先にプランを作成し、その中で行動を設定する流れです。",
+        "createReward": "報酬を作成"
+      },
+      "historyNotice": "ここは旧版履歴ページの互換マウントポイントです。メインの振り返り体験は `Review` に移りましたが、旧ビュー全体もここに残しています。"
+    },
+    "bindingManager": {
+      "title": "バインド管理",
+      "description": "習慣を報酬に紐づけて、すべての努力に明確な目標を持たせます",
+      "createTitle": "新しいバインドを作成",
+      "selectHabit": "習慣を選択",
+      "habitOptionDescription": "完了ごとに {{energy}} エネルギーを獲得",
+      "selectHabitPlaceholder": "紐づける習慣を選択",
+      "selectReward": "報酬を選択",
+      "rewardOptionDescription": "交換には {{energy}} エネルギーが必要",
+      "selectRewardPlaceholder": "紐づける報酬を選択",
+      "createButton": "バインドを作成",
+      "existingBindings": "既存バインド ({{count}} 件の報酬)",
+      "emptyTitle": "まだバインドはありません",
+      "emptyDescription": "バインドを作成して習慣と報酬をつなげましょう。",
+      "rewardNeed": "{{energy}}⚡ 必要",
+      "boundHabitCount": "{{count}} 件の習慣が紐づき済み",
+      "progress": "進捗",
+      "boundHabits": "紐づいた習慣:",
+      "boundHabitEnergy": "完了ごとに +{{energy}}⚡",
+      "unbind": "解除",
+      "toast": {
+        "missingSelectionTitle": "習慣と報酬を選択してください",
+        "missingSelectionDescription": "バインドを作成するには、習慣1つと報酬1つを選ぶ必要があります。",
+        "createdTitle": "バインドを作成しました",
+        "createdDescription": "「{{habit}}」を「{{reward}}」に紐づけました",
+        "removedTitle": "バインドを解除しました",
+        "removedDescription": "「{{habit}}」と「{{reward}}」のバインドを解除しました"
+      }
+    },
+    "historyView": {
+      "title": "履歴",
+      "description": "成長の軌跡を振り返り、データで努力を確認します",
+      "loadingFromCache": "キャッシュから読み込み中...",
+      "cacheStatus": "キャッシュ状態: {{count}} 件の期間が保存済み",
+      "range": {
+        "week": "直近1週間",
+        "weekDescription": "直近7日間のデータを見る",
+        "month": "直近1か月",
+        "monthDescription": "直近30日間のデータを見る",
+        "all": "全期間",
+        "allDescription": "すべての履歴データを見る",
+        "placeholder": "期間を選択"
+      },
+      "allHabits": "すべての習慣",
+      "allHabitsDescription": "すべての習慣データを表示",
+      "habitHistoryDescription": "{{name}} の履歴を見る",
+      "habitPlaceholder": "習慣を選択",
+      "emptyTitle": "履歴はまだありません",
+      "emptyDescription": "習慣の達成を始めると、ここに成長の軌跡が表示されます",
+      "stats": {
+        "totalCompletions": "総完了回数",
+        "totalEnergy": "総獲得エネルギー",
+        "activeDays": "アクティブ日数",
+        "dailyAverage": "1日平均"
+      },
+      "chart": {
+        "title": "直近7日間の推移",
+        "legend": "実線は完了回数、破線は獲得エネルギー"
+      },
+      "rankingTitle": "習慣完了ランキング",
+      "completions": "回数"
+    },
+    "index": {
+      "toast": {
+        "progressRolledBackTitle": "前進を戻しました",
+        "progressRolledBackReward": "「{{reward}}」から {{energy}} の前進を戻しました",
+        "progressRolledBackHabit": "「{{habit}}」の今回の記録を戻しました",
+        "thresholdReached": "交換しきい値に到達しました。この報酬を精算できます。",
+        "finalSprint": "最後の追い込みに入りました。",
+        "steadyMomentum": "フライホイールは安定して回っています。",
+        "progressAdvancedTitle": "「{{reward}}」を前進させました",
+        "progressAdvancedDescription": "今回は +{{energy}} ⚡、交換まで残り {{remaining}} ⚡。{{thresholdMessage}}",
+        "planCreatedTitle": "報酬プランを作成しました",
+        "planCreatedDescription": "「{{name}}」を作成しました。次は行動で充電します。",
+        "planStatusUpdatedTitle": "プラン状態を更新しました",
+        "planStatusUpdatedDescription": "現在の状態: {{status}}",
+        "templateCopiedTitle": "テンプレートを複製しました",
+        "templateCopiedDescription": "「{{name}}」をもとに新しい報酬プランを作成しました。",
+        "habitTemplateCopiedTitle": "習慣テンプレートを複製しました",
+        "habitTemplateCopiedDescription": "「{{name}}」から新しいアクティブ習慣を生成しました。",
+        "planRedeemedTitle": "プランを交換しました",
+        "planRedeemedDescription": "この報酬は正式に精算されました。あとで Library で行動の軌跡を振り返れます。",
+        "planAbandonedTitle": "プランを中止しました",
+        "planAbandonedDescription": "これは失敗ではなく、欲求を明確に整理した結果です。"
+      },
+      "milestone": {
+        "reachedTitle": "「{{reward}}」が交換しきい値に到達しました",
+        "reachedDescription": "今回の前進でプランは {{current}}/{{target}} ⚡ に達しました。交換確認に進めます。",
+        "sprintTitle": "「{{reward}}」が最後の追い込みに入りました",
+        "sprintDescription": "80% を超えました。この検証サイクル完了まで残り {{remaining}} ⚡ です。",
+        "redeemAction": "今すぐ交換"
+      },
+      "defaultPlan": {
+        "name": "例: GPT Plus にアップグレード",
+        "description": "このツールが本当に自分に価値があるかを、実際の行動で検証します。",
+        "motivation": "今の機能を十分に使い切ってから、アップグレードするか決めます。",
+        "habitName": "毎週 O3 を高密度で使う",
+        "habitDescription": "その週で最も掘り下げる価値のある問題を集中して解決します。"
+      },
+      "newRoundSuffix": "新ラウンド",
+      "habitTemplateSuffix": "テンプレート複製"
+    }
   },
   "common": {
     "loading": "読み込み中...",

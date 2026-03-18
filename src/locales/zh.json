@@ -164,10 +164,433 @@
     "resetSuccess": "已重置为默认",
     "resetSuccessDesc": "应用已重置为默认状态，示例数据已恢复",
     "dataBackupTip": "数据导出功能会将您的所有习惯、奖励和完成记录保存为JSON文件，建议定期备份。",
+    "compatibilityLab": "实验与兼容",
+    "compatibilityLabDesc": "reward-first 已经是默认体验，这里保留旧模块入口用于迁移期兼容。",
+    "openLegacyWorkspace": "打开兼容工作台",
+    "compatibilityNote": "兼容模式仍然可用",
+    "compatibilityNoteDesc": "旧版习惯、奖励、绑定和历史视图没有被删除，而是统一收进兼容工作台，避免迁移期功能丢失。",
+    "rewardFirstMode": "当前默认模式：reward-first",
     "appInfo": "应用信息",
     "version": "版本",
     "lastUpdate": "最后更新",
-    "developer": "开发者"
+    "developer": "开发者",
+    "vnextPreview": "vNext Preview"
+  },
+  "vnextShell": {
+    "description": "用行动为真正想要的奖励充能，而不是只管理一堆模块。",
+    "createPlan": "创建奖励计划",
+    "milestone": "里程碑",
+    "viewPlan": "查看计划",
+    "dismissMilestone": "稍后再看",
+    "nav": {
+      "dashboard": "Dashboard",
+      "dashboardShort": "仪表盘",
+      "plans": "Plans",
+      "plansShort": "计划",
+      "review": "Review",
+      "reviewShort": "复盘",
+      "library": "Library",
+      "libraryShort": "沉淀",
+      "settings": "Settings",
+      "settingsShort": "设置"
+    }
+  },
+  "flywheel": {
+    "planStatus": {
+      "wish": "想要",
+      "validating": "验证中",
+      "active": "进行中",
+      "readyToRedeem": "可兑现",
+      "redeemed": "已兑现",
+      "abandoned": "已放弃"
+    },
+    "planType": {
+      "oneTime": "一次性目标",
+      "repeatable": "可重复奖励"
+    },
+    "frequency": {
+      "daily": "每日",
+      "weekly": "每周",
+      "monthly": "每月"
+    },
+    "dashboard": {
+      "badge": "Reward-first Dashboard",
+      "heroEmptyTitle": "先创建一个奖励计划，让飞轮开始转动",
+      "heroEmptyDescription": "把真正想要的奖励变成计划，再用行动证明它值得被兑现。",
+      "distanceToRedeem": "距离兑现",
+      "currentStatus": "当前状态：{{status}}",
+      "actionMix": "行动组合",
+      "actionMixHint": "每轮最高推进 {{energy}} ⚡",
+      "createFirstPlan": "创建第一个奖励计划",
+      "todayActionsCompleted": "今日行动完成",
+      "todayActionsHint": "今天最值得做的行动，按推进影响排序。",
+      "activePlans": "活跃计划数",
+      "activePlansHint": "包含进行中、验证中、可兑现计划。",
+      "lifetimeEnergy": "累计全局能量",
+      "lifetimeEnergyHint": "作为长期投入和成长的总量指标。",
+      "todayActionsTitle": "Today Actions",
+      "todayActionsDescription": "先做最能推进当前奖励计划的事情。",
+      "newPlan": "新建计划",
+      "noTodayActions": "还没有可执行行动。创建奖励计划后，这里会自动出现今天最值得完成的事项。",
+      "impactBadge": "影响 {{impact}}",
+      "bucket": {
+        "week": "本周 {{current}}/{{target}}",
+        "month": "本月 {{current}}/{{target}}",
+        "day": "今日 {{current}}/{{target}}"
+      },
+      "energyGain": "本次 +{{energy}} ⚡",
+      "advancesReward": "完成后将直接推进「{{reward}}」，当前还差 {{remaining}} 次",
+      "unassignedPlan": "当前未绑定计划，可在计划详情中收编",
+      "rollbackProgress": "回退本次推进",
+      "completeAndAdvance": "完成并推进",
+      "validationSignalsTitle": "Validation Signals",
+      "validationSignalsDescription": "最近有哪些欲望正在被验证、兑现或过滤。",
+      "recentRedeemed": "最近完成的计划",
+      "recentAbandoned": "最近放弃的欲望",
+      "recentFocusArea": "最近重点投入的领域",
+      "none": "暂无",
+      "startPlan": "先开始一个计划",
+      "topPlansTitle": "Top Plans",
+      "topPlansDescription": "优先看最接近兑现的目标。"
+    },
+    "plans": {
+      "title": "Plans",
+      "description": "用奖励计划视角管理目标，而不是把奖励和绑定关系拆成多个模块。",
+      "createPlan": "创建奖励计划",
+      "groupCount": "{{count}} 个计划",
+      "emptyGroup": "当前没有这一状态的计划。",
+      "actionAndRecentProgress": "{{count}} 个行动 · 最近推进 {{date}}",
+      "targetDate": "目标日期：{{date}}",
+      "noTargetDate": "未设置",
+      "noRecentProgress": "暂无"
+    },
+    "review": {
+      "title": "Review",
+      "description": "这里不只是看统计，而是看你最近到底在为谁投入，以及哪些欲望值得继续追。",
+      "range": {
+        "week": "最近一周",
+        "month": "最近一月"
+      },
+      "view": {
+        "plans": "计划视角",
+        "habits": "习惯视角"
+      },
+      "stats": {
+        "totalCompletions": "总完成次数",
+        "totalPlans": "计划总数",
+        "validatingPlans": "验证中",
+        "filteredPlans": "被过滤掉的欲望"
+      },
+      "energyTrend": {
+        "title": "能量趋势",
+        "description": "用时间维度看近期投入的密度变化。"
+      },
+      "rankings": {
+        "plansTitle": "奖励推进排行",
+        "habitsTitle": "习惯贡献排行",
+        "plansDescription": "谁在吸收你最多的行动和能量。",
+        "habitsDescription": "哪些行动真正推动了目标。",
+        "planMeta": "{{count}} 次行动 · {{status}}",
+        "habitMeta": "{{completions}} 次完成 · {{energy}} ⚡",
+        "bound": "已绑定计划",
+        "unbound": "未绑定"
+      },
+      "summary": {
+        "title": "验证结果摘要",
+        "description": "已兑现与已放弃的欲望，共同构成你的判断系统。",
+        "validated": "已验证成功",
+        "filtered": "被过滤掉的欲望"
+      },
+      "validated": {
+        "title": "已验证成功的奖励",
+        "description": "哪些目标已经被行动证明值得兑现。",
+        "empty": "还没有已兑现的计划。",
+        "meta": "{{count}} 次行动 · 累计 {{current}} / {{target}} ⚡"
+      },
+      "filtered": {
+        "title": "被过滤掉的欲望",
+        "description": "不是失败，而是一次有效的欲望澄清。",
+        "empty": "目前没有被放弃的计划。",
+        "meta": "放弃前投入 {{count}} 次行动 · 当前进度 {{progress}}%"
+      }
+    },
+    "library": {
+      "title": "Library",
+      "description": "沉淀已完成、已放弃和已归档内容，让当前执行层保持干净。",
+      "archivedPlans": {
+        "title": "已完成 / 已放弃计划",
+        "description": "这些结果本身就是“欲望验证”的记录。",
+        "empty": "还没有沉淀计划。",
+        "meta": "{{status}} · {{count}} 次行动",
+        "view": "查看"
+      },
+      "archivedHabits": {
+        "title": "归档习惯",
+        "description": "不再参与当下飞轮，但保留为未来模板或复盘依据。",
+        "empty": "暂无归档习惯。",
+        "meta": "每次 +{{energy}} ⚡ · {{frequency}} / {{count}}"
+      },
+      "repeatableTemplates": {
+        "title": "可重复奖励模板",
+        "description": "把已经验证过的可重复奖励复制成下一轮计划，而不是重新从零配置。",
+        "empty": "还没有可复用的重复奖励模板。",
+        "meta": "{{count}} 个行动模板 · {{status}}",
+        "duplicate": "复制一轮"
+      },
+      "habitTemplates": {
+        "title": "通用习惯模板",
+        "description": "归档并不等于丢弃，好的行动模式应该可以被快速复用。",
+        "empty": "暂时还没有可复用的习惯模板。",
+        "meta": "{{frequency}} / {{count}} · 每次 +{{energy}} ⚡",
+        "revive": "复制为活跃习惯"
+      },
+      "recommendations": {
+        "title": "推荐模板位",
+        "description": "这里预留给未来的精选模板和计划复制入口，当前先以用户自己的沉淀为主。",
+        "placeholder": "下一步可以在这里加入系统推荐模板、社区模板或“一键复制计划”能力。"
+      }
+    },
+    "planComposer": {
+      "steps": {
+        "rewardDefinition": "奖励定义",
+        "rewardType": "奖励类型",
+        "motivationGoal": "动机与目标",
+        "bindActions": "绑定行动",
+        "confirmPlan": "确认计划"
+      },
+      "rewardName": "第一步：填写奖励名称",
+      "rewardNamePlaceholder": "例如：升级 GPT Plus / 买俯卧撑板",
+      "energyCost": "所需能量",
+      "description": "计划说明",
+      "descriptionPlaceholder": "这是什么奖励，兑现后意味着什么",
+      "planType": "第二步：选择奖励类型",
+      "initialStatus": "初始状态",
+      "motivation": "第三步：填写动机说明",
+      "motivationPlaceholder": "为什么值得追？如何判断它不是一时冲动？",
+      "targetDate": "目标日期",
+      "priority": "优先级",
+      "actionsTitle": "第四步：配置行动",
+      "actionsDescription": "你可以新建行动，也可以把已有习惯收编进当前计划。",
+      "addAction": "新建行动",
+      "selectExistingAction": "从已有习惯库中选择",
+      "addExistingAction": "收编到计划",
+      "actionBadge": "行动 {{index}}",
+      "fromLibrary": "来自习惯库",
+      "actionName": "行动名称",
+      "actionNamePlaceholder": "例如：每周把 O3 对话额度用满",
+      "actionEnergy": "每次推进能量",
+      "frequency": "频率",
+      "targetCount": "目标次数",
+      "actionDescription": "行动说明",
+      "actionDescriptionPlaceholder": "描述完成标准，避免以后变成模糊打卡",
+      "confirmTitle": "第五步：确认计划",
+      "confirmDescription": "检查奖励定义、计划状态和行动组合是否合理。",
+      "summaryReward": "奖励",
+      "summaryRewardMeta": "目标 {{energy}} ⚡ · 截止 {{date}}",
+      "summaryActions": "行动组合",
+      "summaryActionCount": "{{count}} 个行动",
+      "summaryActionItem": "{{name}} · {{frequency}} · {{count}} 次 · +{{energy}} ⚡",
+      "noSupplementaryNote": "尚未填写补充说明。",
+      "dialogTitle": "创建奖励计划",
+      "dialogDescription": "先定义想要什么，再把它拆成可执行的行动。",
+      "previous": "上一步",
+      "next": "下一步",
+      "creating": "创建中...",
+      "create": "创建奖励计划",
+      "unset": "未设置"
+    },
+    "planDetail": {
+      "dialogDescription": "把奖励当成一项计划来运营，而不是一条普通兑换记录。",
+      "currentStatus": "当前状态",
+      "redeemProgress": "兑现进度",
+      "rhythmSummary": "节奏摘要",
+      "boundActionCount": "绑定行动：{{count}}",
+      "totalCompletions": "累计完成：{{count}}",
+      "targetDate": "目标日期：{{date}}",
+      "unset": "未设置",
+      "descriptionTitle": "计划说明",
+      "motivationTitle": "动机说明",
+      "notFilled": "暂未填写",
+      "bindingTitle": "绑定行动",
+      "bindingDescription": "所有绑定行动都在这里维护，不再单独跳到绑定页面。",
+      "selectExistingHabit": "选择已有习惯",
+      "bind": "绑定",
+      "emptyBinding": "暂无绑定行动。先把奖励拆成具体行动，飞轮才会真正转起来。",
+      "boundHabitMeta": "{{frequency}} · 目标 {{count}} 次 · 每次 +{{energy}} ⚡",
+      "unbind": "解绑",
+      "statusActions": "状态操作",
+      "markReadyToRedeem": "标记可兑现",
+      "redeemReward": "兑现奖励",
+      "abandonPlan": "放弃计划",
+      "recentProgress": "近期推进",
+      "noRecentProgress": "还没有推进记录。",
+      "deletedAction": "已删除行动",
+      "completionMeta": "+{{energy}} ⚡ · {{date}}",
+      "close": "关闭"
+    },
+    "redeemDialog": {
+      "title": "兑现奖励确认",
+      "description": "兑现不是一次普通点击，而是把这段行动历程正式结算。",
+      "rewardName": "奖励名称",
+      "actionCount": "行动次数",
+      "boundActions": "绑定行动",
+      "latestProgress": "最近推进",
+      "noDate": "暂无",
+      "actionSources": "这次奖励由哪些行动换来",
+      "actionSourceMeta": "每次 +{{energy}} ⚡",
+      "validatedWindow": "从 {{start}} 到今天，这个奖励已经被足够的行动证明。",
+      "insufficientEnergy": "当前能量还不够，建议继续推进后再兑现。",
+      "later": "暂不兑现",
+      "confirm": "确认兑现"
+    },
+    "abandonDialog": {
+      "title": "放弃计划",
+      "description": "放弃不是失败，而是确认这个奖励目前不值得继续投入。",
+      "currentPlan": "当前计划",
+      "currentPlanMeta": "已投入 {{count}} 次行动 · 当前进度 {{progress}}%",
+      "reason": "放弃原因",
+      "reasonPlaceholder": "例如：完成挑战后发现真实需求不足、兴趣转移、目标已变化",
+      "reflection": "这次学到了什么",
+      "reflectionPlaceholder": "记录一次有效的欲望过滤，而不是只留下一个‘失败’标签",
+      "confirm": "确认放弃"
+    },
+    "legacyWorkspace": {
+      "title": "兼容工作台",
+      "description": "vNext 以奖励计划为主线，但旧版习惯、奖励、绑定和历史模块仍然保留在这里，方便迁移期继续使用。",
+      "tabs": {
+        "overview": "概览",
+        "forms": "旧表单",
+        "bindings": "旧绑定",
+        "history": "旧历史"
+      },
+      "migrationAdvice": {
+        "title": "迁移建议",
+        "primaryFlow": "默认优先使用 `Dashboard / Plans / Review / Library` 作为主流程。",
+        "quickEntry": "如果你只想快速补一个习惯或奖励，可以继续用旧表单。",
+        "compatibilityOnly": "旧绑定和旧历史页面仅作为兼容视图，后续会逐步让位给计划详情和 Review。"
+      },
+      "compatibilityCapabilities": {
+        "title": "当前兼容能力",
+        "habitForm": "旧版习惯表单",
+        "rewardForm": "旧版奖励表单",
+        "bindingManager": "旧版绑定管理",
+        "bindingManagerHint": "见 “旧绑定” 标签",
+        "historyView": "旧版历史视图",
+        "historyViewHint": "见 “旧历史” 标签"
+      },
+      "open": "打开",
+      "forms": {
+        "habitEntryTitle": "旧版习惯入口",
+        "habitEntryDescription": "仍然支持直接创建习惯，并可选择绑定到已有奖励。这个入口已降级到兼容层。",
+        "createHabit": "新建习惯",
+        "rewardEntryTitle": "旧版奖励入口",
+        "rewardEntryDescription": "仍然支持直接创建奖励，但主推荐路径已经改为先创建计划，再在计划中配置行动。",
+        "createReward": "新建奖励"
+      },
+      "historyNotice": "这是旧版历史页面的兼容挂载点。主复盘体验已经迁移到 `Review`，但这里仍保留完整旧视图。"
+    },
+    "bindingManager": {
+      "title": "绑定管理",
+      "description": "将习惯绑定到奖励，让每次努力都有明确目标",
+      "createTitle": "创建新绑定",
+      "selectHabit": "选择习惯",
+      "habitOptionDescription": "每次完成获得 {{energy}} 能量",
+      "selectHabitPlaceholder": "选择要绑定的习惯",
+      "selectReward": "选择奖励",
+      "rewardOptionDescription": "需要消耗 {{energy}} 能量兑换",
+      "selectRewardPlaceholder": "选择要绑定的奖励",
+      "createButton": "创建绑定",
+      "existingBindings": "现有绑定 ({{count}} 个奖励)",
+      "emptyTitle": "还没有任何绑定关系",
+      "emptyDescription": "创建绑定让习惯与奖励产生关联！",
+      "rewardNeed": "需要 {{energy}}⚡",
+      "boundHabitCount": "{{count}} 个习惯绑定",
+      "progress": "完成进度",
+      "boundHabits": "绑定的习惯：",
+      "boundHabitEnergy": "+{{energy}}⚡ 每次完成",
+      "unbind": "解绑",
+      "toast": {
+        "missingSelectionTitle": "请选择习惯和奖励",
+        "missingSelectionDescription": "需要选择一个习惯和一个奖励才能创建绑定",
+        "createdTitle": "绑定创建成功",
+        "createdDescription": "“{{habit}}” 已绑定到 “{{reward}}”",
+        "removedTitle": "绑定已移除",
+        "removedDescription": "“{{habit}}” 与 “{{reward}}” 的绑定已移除"
+      }
+    },
+    "historyView": {
+      "title": "历史记录",
+      "description": "回顾成长轨迹，数据见证努力",
+      "loadingFromCache": "从缓存加载中...",
+      "cacheStatus": "缓存状态: {{count}} 个时间范围已缓存",
+      "range": {
+        "week": "最近一周",
+        "weekDescription": "查看最近7天的数据",
+        "month": "最近一月",
+        "monthDescription": "查看最近30天的数据",
+        "all": "全部时间",
+        "allDescription": "查看所有历史数据",
+        "placeholder": "选择时间范围"
+      },
+      "allHabits": "全部习惯",
+      "allHabitsDescription": "显示所有习惯的数据",
+      "habitHistoryDescription": "查看 {{name}} 的历史数据",
+      "habitPlaceholder": "选择习惯",
+      "emptyTitle": "暂无历史记录",
+      "emptyDescription": "开始完成习惯打卡，这里将显示您的成长轨迹",
+      "stats": {
+        "totalCompletions": "总完成次数",
+        "totalEnergy": "总获得能量",
+        "activeDays": "活跃天数",
+        "dailyAverage": "日均完成"
+      },
+      "chart": {
+        "title": "最近7天趋势",
+        "legend": "实线表示完成次数，虚线表示获得能量"
+      },
+      "rankingTitle": "习惯完成排行",
+      "completions": "次数"
+    },
+    "index": {
+      "toast": {
+        "progressRolledBackTitle": "推进已回退",
+        "progressRolledBackReward": "已从「{{reward}}」回退 {{energy}} 点推进",
+        "progressRolledBackHabit": "已回退「{{habit}}」本次记录",
+        "thresholdReached": "已经达到兑现阈值，可以去结算这个奖励了。",
+        "finalSprint": "已经进入最后冲刺区间。",
+        "steadyMomentum": "飞轮正在稳定推进。",
+        "progressAdvancedTitle": "已推进「{{reward}}」",
+        "progressAdvancedDescription": "本次 +{{energy}} ⚡，距离兑现还差 {{remaining}} ⚡。{{thresholdMessage}}",
+        "planCreatedTitle": "奖励计划已创建",
+        "planCreatedDescription": "已创建「{{name}}」，接下来让行动为它充能。",
+        "planStatusUpdatedTitle": "计划状态已更新",
+        "planStatusUpdatedDescription": "当前状态：{{status}}",
+        "templateCopiedTitle": "模板已复制",
+        "templateCopiedDescription": "已基于「{{name}}」创建一轮新的奖励计划。",
+        "habitTemplateCopiedTitle": "习惯模板已复制",
+        "habitTemplateCopiedDescription": "已从「{{name}}」生成一个新的活跃习惯。",
+        "planRedeemedTitle": "计划已兑现",
+        "planRedeemedDescription": "这次奖励已经正式完成结算，后续可以在 Library 中回看它的行动轨迹。",
+        "planAbandonedTitle": "计划已放弃",
+        "planAbandonedDescription": "这次不是失败，而是一次明确的欲望过滤。"
+      },
+      "milestone": {
+        "reachedTitle": "「{{reward}}」已达到兑现阈值",
+        "reachedDescription": "这次推进把计划正式推到 {{current}}/{{target}} ⚡。现在可以进入兑现确认。",
+        "sprintTitle": "「{{reward}}」进入最后冲刺",
+        "sprintDescription": "你已经跨过 80% 阈值，剩下 {{remaining}} ⚡ 就能完成这轮验证。",
+        "redeemAction": "去兑现"
+      },
+      "defaultPlan": {
+        "name": "示例：升级 GPT Plus",
+        "description": "用真实行动验证这个工具对我是否真的有价值。",
+        "motivation": "先用完当前能力，再决定是否升级。",
+        "habitName": "每周高强度使用 O3",
+        "habitDescription": "把一周内最值得深挖的问题集中解决。"
+      },
+      "newRoundSuffix": "新一轮",
+      "habitTemplateSuffix": "模板副本"
+    }
   },
   "common": {
     "loading": "加载中...",

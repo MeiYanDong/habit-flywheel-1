@@ -164,10 +164,433 @@
     "resetSuccess": "Reset to default",
     "resetSuccessDesc": "App has been reset to default state, sample data has been restored",
     "dataBackupTip": "The data export function will save all your habits, rewards and completion records as a JSON file. Regular backup is recommended.",
+    "compatibilityLab": "Experiments & Compatibility",
+    "compatibilityLabDesc": "Reward-first is now the default experience, while legacy modules stay available here during migration.",
+    "openLegacyWorkspace": "Open Legacy Workspace",
+    "compatibilityNote": "Compatibility mode is still available",
+    "compatibilityNoteDesc": "The old habits, rewards, bindings, and history views were not removed. They are grouped into one compatibility workspace to avoid losing migration-time access.",
+    "rewardFirstMode": "Current default mode: reward-first",
     "appInfo": "App Information",
     "version": "Version",
     "lastUpdate": "Last Update",
-    "developer": "Developer"
+    "developer": "Developer",
+    "vnextPreview": "vNext Preview"
+  },
+  "vnextShell": {
+    "description": "Use action to charge the rewards you truly want, instead of managing a pile of modules.",
+    "createPlan": "Create Reward Plan",
+    "milestone": "Milestone",
+    "viewPlan": "View Plan",
+    "dismissMilestone": "Later",
+    "nav": {
+      "dashboard": "Dashboard",
+      "dashboardShort": "Dash",
+      "plans": "Plans",
+      "plansShort": "Plans",
+      "review": "Review",
+      "reviewShort": "Review",
+      "library": "Library",
+      "libraryShort": "Library",
+      "settings": "Settings",
+      "settingsShort": "Settings"
+    }
+  },
+  "flywheel": {
+    "planStatus": {
+      "wish": "Wish",
+      "validating": "Validating",
+      "active": "Active",
+      "readyToRedeem": "Ready to redeem",
+      "redeemed": "Redeemed",
+      "abandoned": "Abandoned"
+    },
+    "planType": {
+      "oneTime": "One-time goal",
+      "repeatable": "Repeatable reward"
+    },
+    "frequency": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "dashboard": {
+      "badge": "Reward-first Dashboard",
+      "heroEmptyTitle": "Create your first reward plan and start the flywheel",
+      "heroEmptyDescription": "Turn the reward you really want into a plan, then prove it deserves redemption through action.",
+      "distanceToRedeem": "Distance to redeem",
+      "currentStatus": "Current status: {{status}}",
+      "actionMix": "Action mix",
+      "actionMixHint": "Max progress per cycle: {{energy}} ⚡",
+      "createFirstPlan": "Create your first reward plan",
+      "todayActionsCompleted": "Today's completed actions",
+      "todayActionsHint": "The most worthwhile actions for today, ranked by impact.",
+      "activePlans": "Active plans",
+      "activePlansHint": "Includes active, validating, and ready-to-redeem plans.",
+      "lifetimeEnergy": "Lifetime energy",
+      "lifetimeEnergyHint": "A long-term indicator of effort and growth.",
+      "todayActionsTitle": "Today Actions",
+      "todayActionsDescription": "Start with the work that best advances your current reward plan.",
+      "newPlan": "New plan",
+      "noTodayActions": "There are no actionable items yet. Once you create a reward plan, today's best actions will show up here automatically.",
+      "impactBadge": "Impact {{impact}}",
+      "bucket": {
+        "week": "This week {{current}}/{{target}}",
+        "month": "This month {{current}}/{{target}}",
+        "day": "Today {{current}}/{{target}}"
+      },
+      "energyGain": "This time +{{energy}} ⚡",
+      "advancesReward": "Completing this directly advances “{{reward}}”; {{remaining}} more times remain",
+      "unassignedPlan": "Not assigned to a plan yet. Adopt it from the plan detail view.",
+      "rollbackProgress": "Rollback this progress",
+      "completeAndAdvance": "Complete and advance",
+      "validationSignalsTitle": "Validation Signals",
+      "validationSignalsDescription": "What desires have recently been validated, redeemed, or filtered out.",
+      "recentRedeemed": "Recently completed plan",
+      "recentAbandoned": "Recently abandoned desire",
+      "recentFocusArea": "Most invested area recently",
+      "none": "None yet",
+      "startPlan": "Start a plan first",
+      "topPlansTitle": "Top Plans",
+      "topPlansDescription": "Prioritize the goals closest to redemption."
+    },
+    "plans": {
+      "title": "Plans",
+      "description": "Manage goals through reward plans, instead of splitting rewards and bindings across separate modules.",
+      "createPlan": "Create Reward Plan",
+      "groupCount": "{{count}} plans",
+      "emptyGroup": "There are no plans in this state yet.",
+      "actionAndRecentProgress": "{{count}} actions · Last advanced {{date}}",
+      "targetDate": "Target date: {{date}}",
+      "noTargetDate": "Not set",
+      "noRecentProgress": "None yet"
+    },
+    "review": {
+      "title": "Review",
+      "description": "This is not just statistics. It shows what you've really invested in lately, and which desires are still worth pursuing.",
+      "range": {
+        "week": "Last 7 days",
+        "month": "Last 30 days"
+      },
+      "view": {
+        "plans": "Plan view",
+        "habits": "Habit view"
+      },
+      "stats": {
+        "totalCompletions": "Total completions",
+        "totalPlans": "Total plans",
+        "validatingPlans": "Validating",
+        "filteredPlans": "Filtered desires"
+      },
+      "energyTrend": {
+        "title": "Energy trend",
+        "description": "Use time to see how your recent effort density changes."
+      },
+      "rankings": {
+        "plansTitle": "Reward progress ranking",
+        "habitsTitle": "Habit contribution ranking",
+        "plansDescription": "Which goals absorb most of your action and energy.",
+        "habitsDescription": "Which actions truly move your goals.",
+        "planMeta": "{{count}} actions · {{status}}",
+        "habitMeta": "{{completions}} completions · {{energy}} ⚡",
+        "bound": "Bound to plan",
+        "unbound": "Unbound"
+      },
+      "summary": {
+        "title": "Validation summary",
+        "description": "Redeemed and abandoned desires together shape your judgment system.",
+        "validated": "Validated successfully",
+        "filtered": "Filtered desires"
+      },
+      "validated": {
+        "title": "Rewards proven worthwhile",
+        "description": "Which goals have already been proven worth redeeming by action.",
+        "empty": "There are no redeemed plans yet.",
+        "meta": "{{count}} actions · {{current}} / {{target}} ⚡ total"
+      },
+      "filtered": {
+        "title": "Filtered desires",
+        "description": "Not failure, but an effective clarification of desire.",
+        "empty": "There are no abandoned plans right now.",
+        "meta": "{{count}} actions invested before stopping · {{progress}}% progress"
+      }
+    },
+    "library": {
+      "title": "Library",
+      "description": "Archive completed, abandoned, and inactive items so the current execution layer stays clean.",
+      "archivedPlans": {
+        "title": "Completed / abandoned plans",
+        "description": "These outcomes are themselves records of desire validation.",
+        "empty": "There are no archived plans yet.",
+        "meta": "{{status}} · {{count}} actions",
+        "view": "View"
+      },
+      "archivedHabits": {
+        "title": "Archived habits",
+        "description": "No longer part of the active flywheel, but kept as future templates or review evidence.",
+        "empty": "No archived habits yet.",
+        "meta": "+{{energy}} ⚡ each time · {{frequency}} / {{count}}"
+      },
+      "repeatableTemplates": {
+        "title": "Repeatable reward templates",
+        "description": "Clone already-validated repeatable rewards into the next cycle instead of configuring them from scratch.",
+        "empty": "There are no reusable repeatable reward templates yet.",
+        "meta": "{{count}} action templates · {{status}}",
+        "duplicate": "Duplicate a round"
+      },
+      "habitTemplates": {
+        "title": "General habit templates",
+        "description": "Archiving is not deletion. Good action patterns should be easy to reuse.",
+        "empty": "There are no reusable habit templates yet.",
+        "meta": "{{frequency}} / {{count}} · +{{energy}} ⚡ each time",
+        "revive": "Clone as active habit"
+      },
+      "recommendations": {
+        "title": "Recommended template slot",
+        "description": "Reserved for future curated templates and plan duplication entries; for now the focus stays on your own archive.",
+        "placeholder": "Next, this area can include system templates, community templates, or one-click plan duplication."
+      }
+    },
+    "planComposer": {
+      "steps": {
+        "rewardDefinition": "Reward definition",
+        "rewardType": "Reward type",
+        "motivationGoal": "Motivation & goal",
+        "bindActions": "Bind actions",
+        "confirmPlan": "Confirm plan"
+      },
+      "rewardName": "Step 1: Reward name",
+      "rewardNamePlaceholder": "Example: Upgrade to GPT Plus / Buy a push-up board",
+      "energyCost": "Required energy",
+      "description": "Plan description",
+      "descriptionPlaceholder": "What is this reward, and what does redeeming it mean?",
+      "planType": "Step 2: Choose reward type",
+      "initialStatus": "Initial status",
+      "motivation": "Step 3: Write motivation",
+      "motivationPlaceholder": "Why is this worth pursuing? How do you know it isn't just an impulse?",
+      "targetDate": "Target date",
+      "priority": "Priority",
+      "actionsTitle": "Step 4: Configure actions",
+      "actionsDescription": "You can create new actions or adopt existing habits into this plan.",
+      "addAction": "Add action",
+      "selectExistingAction": "Select from existing habits",
+      "addExistingAction": "Adopt into plan",
+      "actionBadge": "Action {{index}}",
+      "fromLibrary": "From habit library",
+      "actionName": "Action name",
+      "actionNamePlaceholder": "Example: Use the full O3 conversation budget every week",
+      "actionEnergy": "Energy per action",
+      "frequency": "Frequency",
+      "targetCount": "Target count",
+      "actionDescription": "Action description",
+      "actionDescriptionPlaceholder": "Describe the completion criteria so it doesn't become a vague check-in later.",
+      "confirmTitle": "Step 5: Confirm plan",
+      "confirmDescription": "Check whether the reward definition, status, and action mix make sense.",
+      "summaryReward": "Reward",
+      "summaryRewardMeta": "Target {{energy}} ⚡ · Due {{date}}",
+      "summaryActions": "Action mix",
+      "summaryActionCount": "{{count}} actions",
+      "summaryActionItem": "{{name}} · {{frequency}} · {{count}} times · +{{energy}} ⚡",
+      "noSupplementaryNote": "No supplementary notes yet.",
+      "dialogTitle": "Create Reward Plan",
+      "dialogDescription": "Define what you want first, then break it into executable actions.",
+      "previous": "Previous",
+      "next": "Next",
+      "creating": "Creating...",
+      "create": "Create reward plan",
+      "unset": "Not set"
+    },
+    "planDetail": {
+      "dialogDescription": "Operate the reward as a plan, not as an ordinary redemption record.",
+      "currentStatus": "Current status",
+      "redeemProgress": "Redemption progress",
+      "rhythmSummary": "Rhythm summary",
+      "boundActionCount": "Bound actions: {{count}}",
+      "totalCompletions": "Total completions: {{count}}",
+      "targetDate": "Target date: {{date}}",
+      "unset": "Not set",
+      "descriptionTitle": "Plan description",
+      "motivationTitle": "Motivation note",
+      "notFilled": "Not filled in yet",
+      "bindingTitle": "Bound actions",
+      "bindingDescription": "Manage all bound actions here instead of jumping to a separate binding page.",
+      "selectExistingHabit": "Select an existing habit",
+      "bind": "Bind",
+      "emptyBinding": "No actions are bound yet. Break the reward into concrete actions before the flywheel can really spin.",
+      "boundHabitMeta": "{{frequency}} · Target {{count}} times · +{{energy}} ⚡ each time",
+      "unbind": "Unbind",
+      "statusActions": "Status actions",
+      "markReadyToRedeem": "Mark ready to redeem",
+      "redeemReward": "Redeem reward",
+      "abandonPlan": "Abandon plan",
+      "recentProgress": "Recent progress",
+      "noRecentProgress": "No progress records yet.",
+      "deletedAction": "Deleted action",
+      "completionMeta": "+{{energy}} ⚡ · {{date}}",
+      "close": "Close"
+    },
+    "redeemDialog": {
+      "title": "Redeem reward confirmation",
+      "description": "Redemption is not a trivial click. It formally settles this whole stretch of action.",
+      "rewardName": "Reward name",
+      "actionCount": "Action count",
+      "boundActions": "Bound actions",
+      "latestProgress": "Latest progress",
+      "noDate": "None yet",
+      "actionSources": "Which actions earned this reward",
+      "actionSourceMeta": "+{{energy}} ⚡ each time",
+      "validatedWindow": "From {{start}} to today, this reward has been proven by enough action.",
+      "insufficientEnergy": "Current energy is still not enough. Keep pushing before redeeming.",
+      "later": "Redeem later",
+      "confirm": "Confirm redemption"
+    },
+    "abandonDialog": {
+      "title": "Abandon plan",
+      "description": "Abandoning is not failure. It means confirming this reward is not worth more investment right now.",
+      "currentPlan": "Current plan",
+      "currentPlanMeta": "{{count}} actions invested · {{progress}}% progress",
+      "reason": "Reason for abandoning",
+      "reasonPlaceholder": "Example: after trying it, the real need felt weak, interest shifted, or the goal changed",
+      "reflection": "What did you learn this time?",
+      "reflectionPlaceholder": "Record a useful desire filter instead of leaving only a failure label.",
+      "confirm": "Confirm abandonment"
+    },
+    "legacyWorkspace": {
+      "title": "Compatibility workspace",
+      "description": "vNext is now centered on reward plans, but the old habits, rewards, bindings, and history modules remain here for use during migration.",
+      "tabs": {
+        "overview": "Overview",
+        "forms": "Legacy forms",
+        "bindings": "Legacy bindings",
+        "history": "Legacy history"
+      },
+      "migrationAdvice": {
+        "title": "Migration advice",
+        "primaryFlow": "Use `Dashboard / Plans / Review / Library` as the default primary flow.",
+        "quickEntry": "If you only want to quickly add a habit or reward, you can still use the legacy forms.",
+        "compatibilityOnly": "Legacy binding and legacy history are compatibility views only, and will gradually give way to plan detail and Review."
+      },
+      "compatibilityCapabilities": {
+        "title": "Current compatibility capabilities",
+        "habitForm": "Legacy habit form",
+        "rewardForm": "Legacy reward form",
+        "bindingManager": "Legacy binding manager",
+        "bindingManagerHint": "See the “Legacy bindings” tab",
+        "historyView": "Legacy history view",
+        "historyViewHint": "See the “Legacy history” tab"
+      },
+      "open": "Open",
+      "forms": {
+        "habitEntryTitle": "Legacy habit entry",
+        "habitEntryDescription": "Direct habit creation still works and can still bind to existing rewards. This entry has been downgraded into the compatibility layer.",
+        "createHabit": "Create habit",
+        "rewardEntryTitle": "Legacy reward entry",
+        "rewardEntryDescription": "Direct reward creation still works, but the recommended path is now to create a plan first and configure actions inside that plan.",
+        "createReward": "Create reward"
+      },
+      "historyNotice": "This is the compatibility mount point for the legacy history page. The main review experience has moved to `Review`, but the full old view still stays here."
+    },
+    "bindingManager": {
+      "title": "Binding management",
+      "description": "Bind habits to rewards so every effort has a clear target",
+      "createTitle": "Create a new binding",
+      "selectHabit": "Select habit",
+      "habitOptionDescription": "Gain {{energy}} energy each completion",
+      "selectHabitPlaceholder": "Choose a habit to bind",
+      "selectReward": "Select reward",
+      "rewardOptionDescription": "Costs {{energy}} energy to redeem",
+      "selectRewardPlaceholder": "Choose a reward to bind",
+      "createButton": "Create binding",
+      "existingBindings": "Existing bindings ({{count}} rewards)",
+      "emptyTitle": "There are no bindings yet",
+      "emptyDescription": "Create a binding so habits and rewards become connected.",
+      "rewardNeed": "Need {{energy}}⚡",
+      "boundHabitCount": "{{count}} habits bound",
+      "progress": "Progress",
+      "boundHabits": "Bound habits:",
+      "boundHabitEnergy": "+{{energy}}⚡ each completion",
+      "unbind": "Unbind",
+      "toast": {
+        "missingSelectionTitle": "Choose a habit and a reward",
+        "missingSelectionDescription": "You need to select one habit and one reward to create a binding.",
+        "createdTitle": "Binding created",
+        "createdDescription": "“{{habit}}” is now bound to “{{reward}}”",
+        "removedTitle": "Binding removed",
+        "removedDescription": "The binding between “{{habit}}” and “{{reward}}” has been removed"
+      }
+    },
+    "historyView": {
+      "title": "History",
+      "description": "Review your growth path and let the data witness your effort",
+      "loadingFromCache": "Loading from cache...",
+      "cacheStatus": "Cache status: {{count}} time ranges cached",
+      "range": {
+        "week": "Last 7 days",
+        "weekDescription": "View the last 7 days of data",
+        "month": "Last 30 days",
+        "monthDescription": "View the last 30 days of data",
+        "all": "All time",
+        "allDescription": "View all historical data",
+        "placeholder": "Select time range"
+      },
+      "allHabits": "All habits",
+      "allHabitsDescription": "Show data for all habits",
+      "habitHistoryDescription": "View the history of {{name}}",
+      "habitPlaceholder": "Select habit",
+      "emptyTitle": "No history yet",
+      "emptyDescription": "Start completing habits and your growth path will appear here",
+      "stats": {
+        "totalCompletions": "Total completions",
+        "totalEnergy": "Total energy gained",
+        "activeDays": "Active days",
+        "dailyAverage": "Daily average"
+      },
+      "chart": {
+        "title": "Last 7 days trend",
+        "legend": "Solid line = completions, dashed line = gained energy"
+      },
+      "rankingTitle": "Habit completion ranking",
+      "completions": "Times"
+    },
+    "index": {
+      "toast": {
+        "progressRolledBackTitle": "Progress rolled back",
+        "progressRolledBackReward": "{{energy}} progress removed from “{{reward}}”",
+        "progressRolledBackHabit": "Rolled back this record for “{{habit}}”",
+        "thresholdReached": "The redemption threshold has been reached. You can settle this reward now.",
+        "finalSprint": "You've entered the final sprint.",
+        "steadyMomentum": "The flywheel is moving steadily.",
+        "progressAdvancedTitle": "Advanced “{{reward}}”",
+        "progressAdvancedDescription": "+{{energy}} ⚡ this time, {{remaining}} ⚡ left before redemption. {{thresholdMessage}}",
+        "planCreatedTitle": "Reward plan created",
+        "planCreatedDescription": "Created “{{name}}”. Let action charge it next.",
+        "planStatusUpdatedTitle": "Plan status updated",
+        "planStatusUpdatedDescription": "Current status: {{status}}",
+        "templateCopiedTitle": "Template copied",
+        "templateCopiedDescription": "Created a new reward plan based on “{{name}}”.",
+        "habitTemplateCopiedTitle": "Habit template copied",
+        "habitTemplateCopiedDescription": "Generated a new active habit from “{{name}}”.",
+        "planRedeemedTitle": "Plan redeemed",
+        "planRedeemedDescription": "This reward has now been formally settled. You can revisit its action trail later in Library.",
+        "planAbandonedTitle": "Plan abandoned",
+        "planAbandonedDescription": "This was not failure, but a clear filtering of desire."
+      },
+      "milestone": {
+        "reachedTitle": "“{{reward}}” reached the redemption threshold",
+        "reachedDescription": "This advance pushed the plan to {{current}}/{{target}} ⚡. You can move to redemption confirmation now.",
+        "sprintTitle": "“{{reward}}” entered the final sprint",
+        "sprintDescription": "You've crossed the 80% mark. Only {{remaining}} ⚡ remain to complete this validation cycle.",
+        "redeemAction": "Redeem now"
+      },
+      "defaultPlan": {
+        "name": "Example: Upgrade to GPT Plus",
+        "description": "Use real action to validate whether this tool is actually valuable to me.",
+        "motivation": "Use the current capability fully before deciding to upgrade.",
+        "habitName": "Use O3 intensely every week",
+        "habitDescription": "Concentrate the week's deepest questions and resolve them thoroughly."
+      },
+      "newRoundSuffix": "new round",
+      "habitTemplateSuffix": "template copy"
+    }
   },
   "common": {
     "loading": "Loading...",

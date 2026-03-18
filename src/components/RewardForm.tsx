@@ -80,8 +80,8 @@ const RewardForm: React.FC<RewardFormProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
+      <DialogContent className="dialog-shell dialog-shell--legacy sm:max-w-[425px]">
+        <DialogHeader className="border-b border-border/70 pb-4">
           <DialogTitle>
             {isEditing ? t('rewards.edit') : t('rewards.create')}
           </DialogTitle>
@@ -147,10 +147,10 @@ const RewardForm: React.FC<RewardFormProps> = ({
             />
 
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={handleClose}>
+              <Button type="button" variant="outline" className="btn-subtle" onClick={handleClose}>
                 {t('rewards.cancel')}
               </Button>
-              <Button type="submit" className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600">
+              <Button type="submit">
                 {isEditing ? t('rewards.save') : t('rewards.create_action')}
               </Button>
             </DialogFooter>

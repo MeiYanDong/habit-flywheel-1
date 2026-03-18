@@ -140,4 +140,31 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) {
+            return;
+          }
+
+          if (id.includes('recharts')) {
+            return 'charts';
+          }
+
+          if (id.includes('@supabase')) {
+            return 'supabase';
+          }
+
+          if (id.includes('react-router-dom') || id.includes('@tanstack/react-query')) {
+            return 'app-core';
+          }
+
+          if (id.includes('@radix-ui') || id.includes('lucide-react') || id.includes('cmdk')) {
+            return 'ui-kit';
+          }
+        },
+      },
+    },
+  },
 }));

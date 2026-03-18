@@ -1,9 +1,7 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Enhanced Select 动画样式 */
 @keyframes enhanced-select-fade-in {
   from {
     opacity: 0;
@@ -26,20 +24,17 @@
   }
 }
 
-/* 增强的下拉触发器样式 */
 .enhanced-select-trigger {
   position: relative;
   overflow: hidden;
 }
 
 .enhanced-select-trigger::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0;
+  inset: 0;
   left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, hsl(var(--brass) / 0.12), transparent);
   transition: left 0.5s;
 }
 
@@ -47,7 +42,6 @@
   left: 100%;
 }
 
-/* 选项项动画 */
 .enhanced-select-item {
   position: relative;
   transition: all 0.15s ease-in-out;
@@ -58,13 +52,13 @@
 }
 
 .enhanced-select-item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(to bottom, #a855f7, #ec4899);
+  background: linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--brass)));
   transform: scaleY(0);
   transition: transform 0.2s ease;
 }
@@ -74,7 +68,6 @@
   transform: scaleY(1);
 }
 
-/* 响应式动画优化 */
 @media (prefers-reduced-motion: reduce) {
   .enhanced-select-trigger::before,
   .enhanced-select-item {
@@ -83,131 +76,125 @@
   }
 }
 
-/* 触摸设备优化 */
 @media (hover: none) {
   .enhanced-select-trigger:hover::before {
     left: -100%;
   }
-  
+
   .enhanced-select-item:hover {
     transform: none;
   }
-  
+
   .enhanced-select-item:active {
     transform: scale(0.98);
   }
 }
 
-/* V2.7 苹果设计风格 - 紫金黑主题 */
-
 @layer base {
   :root {
-    /* 主色调 */
-    --primary-purple: 124 58 237;      /* #7C3AED */
-    --primary-gold: 245 158 11;        /* #F59E0B */
-    --primary-dark: 31 41 55;          /* #1F2937 */
+    --background: 40 35% 96%;
+    --foreground: 158 18% 16%;
 
-    /* 辅助色调 */
-    --purple-light: 167 139 250;       /* #A78BFA */
-    --purple-dark: 91 33 182;          /* #5B21B6 */
-    --gold-light: 251 191 36;          /* #FBBF24 */
-    --gold-dark: 217 119 6;            /* #D97706 */
+    --card: 42 37% 98%;
+    --card-foreground: 158 18% 16%;
 
-    /* 功能色调 */
-    --success: 16 185 129;             /* #10B981 */
-    --warning: 245 158 11;             /* #F59E0B */
-    --error: 239 68 68;                /* #EF4444 */
-    --info: 59 130 246;                /* #3B82F6 */
+    --popover: 42 37% 98%;
+    --popover-foreground: 158 18% 16%;
 
-    /* 浅色模式变量 */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --primary: 160 24% 28%;
+    --primary-foreground: 42 37% 97%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --secondary: 40 24% 90%;
+    --secondary-foreground: 158 14% 24%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --muted: 36 21% 91%;
+    --muted-foreground: 28 10% 38%;
 
-    --primary: var(--primary-purple);
-    --primary-foreground: 210 40% 98%;
+    --accent: 40 21% 89%;
+    --accent-foreground: 158 18% 16%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --destructive: 12 40% 44%;
+    --destructive-foreground: 42 37% 97%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 34 18% 81%;
+    --input: 34 18% 81%;
+    --ring: 160 24% 28%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --radius: 1rem;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --sidebar-background: 40 31% 94%;
+    --sidebar-foreground: 158 18% 16%;
+    --sidebar-primary: 160 24% 28%;
+    --sidebar-primary-foreground: 42 37% 97%;
+    --sidebar-accent: 40 24% 89%;
+    --sidebar-accent-foreground: 158 18% 16%;
+    --sidebar-border: 34 18% 81%;
+    --sidebar-ring: 33 53% 46%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: var(--primary-purple);
+    --brass: 33 53% 46%;
+    --brass-foreground: 42 37% 97%;
+    --ink-soft: 158 12% 34%;
+    --paper-shadow: 33 17% 73%;
+    --overlay: 158 20% 12%;
 
-    --radius: 0.75rem;
-
-    /* 侧边栏 */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --wish: 34 10% 48%;
+    --validating: 31 42% 46%;
+    --active: 160 24% 28%;
+    --ready: 35 64% 48%;
+    --redeemed: 146 28% 36%;
+    --abandoned: 12 33% 43%;
   }
 
   .dark {
-    /* 深色模式背景和前景 */
-    --background: 222.2 84% 4.9%;       /* 深色背景 */
-    --foreground: 210 40% 98%;          /* 浅色文字 */
-    
-    /* 卡片在深色模式下 */
-    --card: 217.2 32.6% 17.5%;          /* 深色卡片背景 */
-    --card-foreground: 210 40% 98%;     /* 卡片文字 */
-    
-    /* 弹出层 */
-    --popover: 217.2 32.6% 17.5%;
-    --popover-foreground: 210 40% 98%;
-    
-    /* 主色调适配 */
-    --primary: 167 139 250;             /* 浅紫色作为主色 */
-    --primary-foreground: 222.2 47.4% 11.2%;
-    
-    /* 次要颜色 */
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    
-    /* 静默颜色 */
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    
-    /* 强调色 */
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    
-    /* 破坏性颜色调整 */
-    --destructive: 0 62.8% 50%;         /* 稍微亮一点的红色 */
-    --destructive-foreground: 210 40% 98%;
-    
-    /* 边框和输入 */
-    --border: 217.2 32.6% 25%;          /* 稍微亮一点的边框 */
-    --input: 217.2 32.6% 20%;           /* 输入框背景 */
-    --ring: 167 139 250;                /* 焦点环颜色 */
-    
-    /* 侧边栏深色模式 */
-    --sidebar-background: 222.2 84% 4.9%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 167 139 250;
-    --sidebar-primary-foreground: 222.2 47.4% 11.2%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 25%;
-    --sidebar-ring: 167 139 250;
+    --background: 160 16% 9%;
+    --foreground: 40 27% 92%;
+
+    --card: 160 15% 12%;
+    --card-foreground: 40 27% 92%;
+
+    --popover: 160 15% 12%;
+    --popover-foreground: 40 27% 92%;
+
+    --primary: 154 25% 62%;
+    --primary-foreground: 160 18% 11%;
+
+    --secondary: 160 12% 18%;
+    --secondary-foreground: 40 27% 92%;
+
+    --muted: 160 12% 16%;
+    --muted-foreground: 34 11% 66%;
+
+    --accent: 160 12% 18%;
+    --accent-foreground: 40 27% 92%;
+
+    --destructive: 12 35% 50%;
+    --destructive-foreground: 40 27% 92%;
+
+    --border: 160 10% 23%;
+    --input: 160 10% 23%;
+    --ring: 154 25% 62%;
+
+    --sidebar-background: 160 16% 8%;
+    --sidebar-foreground: 40 27% 92%;
+    --sidebar-primary: 154 25% 62%;
+    --sidebar-primary-foreground: 160 18% 11%;
+    --sidebar-accent: 160 12% 18%;
+    --sidebar-accent-foreground: 40 27% 92%;
+    --sidebar-border: 160 10% 23%;
+    --sidebar-ring: 33 54% 58%;
+
+    --brass: 33 54% 58%;
+    --brass-foreground: 160 18% 11%;
+    --ink-soft: 40 12% 72%;
+    --paper-shadow: 160 10% 3%;
+    --overlay: 160 24% 5%;
+
+    --wish: 35 10% 64%;
+    --validating: 33 48% 58%;
+    --active: 154 25% 62%;
+    --ready: 35 68% 64%;
+    --redeemed: 146 29% 58%;
+    --abandoned: 12 40% 61%;
   }
 }
 
@@ -215,13 +202,36 @@
   * {
     @apply border-border;
   }
-  
-  body {
-    @apply bg-background text-foreground transition-colors duration-300;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  html {
+    color-scheme: light;
   }
 
-  /* 优化的滚动条 - 深色模式适配 */
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+    background-image:
+      radial-gradient(circle at top, hsl(var(--primary) / 0.08), transparent 32%),
+      linear-gradient(180deg, hsl(var(--background)), hsl(var(--background)));
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: hsl(var(--brass) / 0.22);
+    color: hsl(var(--foreground));
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -232,240 +242,388 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
+    background: hsl(var(--primary) / 0.18);
+    border-radius: 999px;
     transition: background 0.2s;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .dark ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .dark ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: hsl(var(--primary) / 0.32);
   }
 }
 
 @layer components {
-  /* 习惯卡片样式 - 深色模式优化 */
-  .habit-card {
-    @apply bg-card border border-border shadow-sm hover:shadow-md transition-all duration-200;
+  .editorial-display {
+    font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    letter-spacing: -0.03em;
+  }
+
+  .editorial-shell {
+    background:
+      radial-gradient(circle at top right, hsl(var(--brass) / 0.12), transparent 28%),
+      linear-gradient(180deg, hsl(var(--background)), hsl(var(--card)));
+  }
+
+  .surface-panel {
+    background: linear-gradient(180deg, hsl(var(--card) / 0.98), hsl(var(--card) / 0.92));
+    border: 1px solid hsl(var(--border) / 0.95);
+    box-shadow:
+      0 1px 0 hsl(var(--card) / 0.9) inset,
+      0 18px 44px hsl(var(--paper-shadow) / 0.22);
+  }
+
+  .surface-panel-muted {
+    background: linear-gradient(180deg, hsl(var(--muted) / 0.68), hsl(var(--card) / 0.95));
+    border: 1px solid hsl(var(--border) / 0.85);
+  }
+
+  .surface-panel-strong {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.14), hsl(var(--card) / 0.98) 45%, hsl(var(--brass) / 0.12));
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 24px 60px hsl(var(--paper-shadow) / 0.28);
+  }
+
+  .surface-panel-brass {
+    background: linear-gradient(135deg, hsl(var(--brass) / 0.18), hsl(var(--card)) 62%);
+    border: 1px solid hsl(var(--brass) / 0.28);
+  }
+
+  .surface-panel-reflective {
+    background: linear-gradient(135deg, hsl(var(--abandoned) / 0.12), hsl(var(--card)) 58%);
+    border: 1px solid hsl(var(--abandoned) / 0.22);
+  }
+
+  .surface-panel-compat {
+    background: linear-gradient(180deg, hsl(var(--muted) / 0.82), hsl(var(--card)));
+    border: 1px dashed hsl(var(--border));
+  }
+
+  .surface-subtle-grid {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .surface-subtle-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    opacity: 0.45;
+  }
+
+  .metric-panel {
+    background: hsl(var(--background) / 0.82);
+    border: 1px solid hsl(var(--border) / 0.8);
+    box-shadow: 0 10px 25px hsl(var(--paper-shadow) / 0.12);
+  }
+
+  .status-chip {
+    border-width: 1px;
+  }
+
+  .status-chip--wish {
+    background: hsl(var(--wish) / 0.14);
+    border-color: hsl(var(--wish) / 0.22);
+    color: hsl(var(--wish));
+  }
+
+  .status-chip--validating {
+    background: hsl(var(--validating) / 0.16);
+    border-color: hsl(var(--validating) / 0.28);
+    color: hsl(var(--validating));
+  }
+
+  .status-chip--active {
+    background: hsl(var(--active) / 0.14);
+    border-color: hsl(var(--active) / 0.26);
+    color: hsl(var(--active));
+  }
+
+  .status-chip--ready_to_redeem {
+    background: hsl(var(--ready) / 0.16);
+    border-color: hsl(var(--ready) / 0.28);
+    color: hsl(var(--ready));
+  }
+
+  .status-chip--redeemed {
+    background: hsl(var(--redeemed) / 0.14);
+    border-color: hsl(var(--redeemed) / 0.28);
+    color: hsl(var(--redeemed));
+  }
+
+  .status-chip--abandoned {
+    background: hsl(var(--abandoned) / 0.14);
+    border-color: hsl(var(--abandoned) / 0.24);
+    color: hsl(var(--abandoned));
+  }
+
+  .dialog-shell {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    background:
+      linear-gradient(180deg, hsl(var(--card)), hsl(var(--background)));
+    box-shadow:
+      0 1px 0 hsl(var(--card) / 0.9) inset,
+      0 30px 90px hsl(var(--overlay) / 0.24);
+  }
+
+  .dialog-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
+  }
+
+  .dialog-shell--compose {
+    background:
+      linear-gradient(135deg, hsl(var(--primary) / 0.1), transparent 34%),
+      linear-gradient(180deg, hsl(var(--card)), hsl(var(--background)));
+  }
+
+  .dialog-shell--detail {
+    background:
+      linear-gradient(135deg, hsl(var(--primary) / 0.07), transparent 28%),
+      linear-gradient(180deg, hsl(var(--card)), hsl(var(--background)));
+  }
+
+  .dialog-shell--redeem {
+    background:
+      radial-gradient(circle at top right, hsl(var(--brass) / 0.2), transparent 30%),
+      linear-gradient(180deg, hsl(var(--card)), hsl(var(--background)));
+    border-color: hsl(var(--brass) / 0.25);
+  }
+
+  .dialog-shell--abandon {
+    background:
+      radial-gradient(circle at top right, hsl(var(--abandoned) / 0.14), transparent 30%),
+      linear-gradient(180deg, hsl(var(--card)), hsl(var(--background)));
+    border-color: hsl(var(--abandoned) / 0.22);
+  }
+
+  .dialog-shell--legacy {
+    background:
+      linear-gradient(180deg, hsl(var(--muted) / 0.78), hsl(var(--card)));
+    border-style: dashed;
+  }
+
+  .dialog-section {
+    background: hsl(var(--background) / 0.74);
+    border: 1px solid hsl(var(--border) / 0.82);
+    box-shadow: 0 10px 24px hsl(var(--paper-shadow) / 0.08);
+  }
+
+  .dialog-section-muted {
+    background: hsl(var(--muted) / 0.52);
+    border: 1px solid hsl(var(--border) / 0.78);
+  }
+
+  .btn-brass {
+    background: hsl(var(--brass));
+    color: hsl(var(--brass-foreground));
+  }
+
+  .btn-brass:hover {
+    background: hsl(var(--brass) / 0.92);
+  }
+
+  .btn-quiet-danger {
+    background: hsl(var(--abandoned) / 0.12);
+    color: hsl(var(--abandoned));
+    border: 1px solid hsl(var(--abandoned) / 0.22);
+  }
+
+  .btn-quiet-danger:hover {
+    background: hsl(var(--abandoned) / 0.18);
+    color: hsl(var(--abandoned));
+  }
+
+  .btn-subtle {
+    background: hsl(var(--background) / 0.82);
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
+  }
+
+  .btn-subtle:hover {
+    background: hsl(var(--muted) / 0.72);
+    color: hsl(var(--foreground));
+  }
+
+  .progress-shell {
+    background: hsl(var(--muted) / 0.74);
+  }
+
+  .progress-brass [data-state] {
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--brass)));
+  }
+
+  .habit-card,
+  .reward-card {
+    @apply bg-card border border-border shadow-sm transition-all duration-200 hover:shadow-md;
   }
 
   .habit-card.completed {
-    @apply bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-700;
-  }
-
-  /* 奖励卡片样式 - 深色模式优化 */
-  .reward-card {
-    @apply bg-card border border-border shadow-sm hover:shadow-md transition-all duration-200;
+    background: hsl(var(--redeemed) / 0.12);
+    border-color: hsl(var(--redeemed) / 0.24);
   }
 
   .reward-card.redeemable {
-    @apply ring-2 ring-amber-400 ring-opacity-50 dark:ring-amber-500 dark:ring-opacity-60;
+    box-shadow: 0 0 0 2px hsl(var(--brass) / 0.24);
   }
 
-  /* 绑定习惯区域 - 深色模式优化 */
   .binding-habit-area {
-    @apply bg-purple-50 border-purple-200 dark:bg-purple-900/20 dark:border-purple-700;
+    background: hsl(var(--primary) / 0.08);
+    border-color: hsl(var(--primary) / 0.2);
   }
 
-  /* 习惯完成排行项 - 深色模式优化 */
   .ranking-item {
-    @apply bg-gray-50 dark:bg-gray-800/50 border border-transparent dark:border-gray-700/50;
+    background: hsl(var(--muted) / 0.42);
+    border: 1px solid hsl(var(--border) / 0.6);
   }
 
   .ranking-item:hover {
-    @apply bg-gray-100 dark:bg-gray-700/50;
+    background: hsl(var(--muted) / 0.74);
   }
 
-  /* 进度条样式 - 深色模式优化 */
   .progress-bar {
-    @apply w-full bg-muted rounded-full h-2 overflow-hidden;
+    @apply w-full rounded-full h-2 overflow-hidden;
+    background: hsl(var(--muted));
   }
 
   .progress-fill {
-    @apply bg-gradient-to-r from-purple-500 to-amber-500 h-full rounded-full transition-all duration-500 ease-out;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--brass)));
+    transition: all 0.5s ease-out;
   }
 
-  /* 能量图标动画 */
   .energy-icon {
     @apply inline-block;
     animation: pulse-energy 2s infinite;
   }
 
-  @keyframes pulse-energy {
-    0%, 100% {
-      transform: scale(1);
-      filter: brightness(1);
-    }
-    50% {
-      transform: scale(1.1);
-      filter: brightness(1.2);
-    }
-  }
-
-  /* 完成动画 */
-  .completion-animation {
-    animation: completion-bounce 0.6s ease-out;
-  }
-
-  @keyframes completion-bounce {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  /* 悬停效果 */
   .hover-lift {
-    @apply transition-transform duration-200 hover:scale-105;
+    @apply transition-transform duration-200 hover:scale-[1.02];
   }
 
-  /* 渐变背景 - 深色模式适配 */
   .gradient-purple-gold {
-    background: linear-gradient(135deg, rgb(124 58 237) 0%, rgb(245 158 11) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brass)));
   }
 
   .gradient-card {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.08), hsl(var(--brass) / 0.08));
   }
 
-  .dark .gradient-card {
-    background: linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(251, 191, 36, 0.1) 100%);
-  }
-
-  /* 玻璃态效果 - 深色模式优化 */
   .glass-effect {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(18px);
+    background: hsl(var(--card) / 0.75);
+    border: 1px solid hsl(var(--border) / 0.5);
   }
 
-  .dark .glass-effect {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* 阴影系统 - 深色模式适配 */
   .shadow-apple-sm {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px hsl(var(--paper-shadow) / 0.12);
   }
 
   .shadow-apple-md {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 14px 30px hsl(var(--paper-shadow) / 0.16);
   }
 
   .shadow-apple-lg {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 24px 50px hsl(var(--paper-shadow) / 0.18);
   }
 
   .shadow-apple-xl {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 30px 80px hsl(var(--overlay) / 0.22);
   }
 
-  .dark .shadow-apple-sm {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
-
-  .dark .shadow-apple-md {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-
-  .dark .shadow-apple-lg {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-  }
-
-  .dark .shadow-apple-xl {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-  }
-
-  /* 按钮样式增强 - 深色模式优化 */
   .btn-primary {
-    @apply bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply rounded-lg px-4 py-2 font-medium text-primary-foreground transition-all duration-200 shadow-sm hover:shadow-md;
+    background: hsl(var(--primary));
   }
 
-  .dark .btn-primary {
-    @apply bg-purple-500 hover:bg-purple-600;
+  .btn-primary:hover {
+    background: hsl(var(--primary) / 0.92);
   }
 
   .btn-secondary {
-    @apply bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply rounded-lg px-4 py-2 font-medium transition-all duration-200 shadow-sm hover:shadow-md;
+    background: hsl(var(--brass));
+    color: hsl(var(--brass-foreground));
   }
 
-  .dark .btn-secondary {
-    @apply bg-amber-400 hover:bg-amber-500 text-black;
+  .btn-secondary:hover {
+    background: hsl(var(--brass) / 0.92);
   }
 
   .btn-outline {
-    @apply border border-border hover:border-purple-400 text-foreground hover:text-purple-700 font-medium py-2 px-4 rounded-lg transition-all duration-200 bg-background hover:bg-purple-50;
+    @apply rounded-lg border px-4 py-2 font-medium transition-all duration-200;
+    border-color: hsl(var(--border));
+    background: hsl(var(--background) / 0.82);
+    color: hsl(var(--foreground));
   }
 
-  .dark .btn-outline {
-    @apply hover:text-purple-300 hover:bg-purple-900/20;
+  .btn-outline:hover {
+    background: hsl(var(--muted));
   }
 
-  /* 深色模式下的文本渐变优化 */
   .text-gradient-purple-gold {
-    background: linear-gradient(135deg, rgb(124 58 237), rgb(245 158 11));
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brass)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .dark .text-gradient-purple-gold {
-    background: linear-gradient(135deg, rgb(167 139 250), rgb(251 191 36));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* 边框渐变 - 深色模式适配 */
   .border-gradient {
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(135deg, rgb(124 58 237), rgb(245 158 11)) border-box;
-    border: 2px solid transparent;
-  }
-
-  .dark .border-gradient {
-    background: linear-gradient(rgb(31 41 55), rgb(31 41 55)) padding-box,
-                linear-gradient(135deg, rgb(167 139 250), rgb(251 191 36)) border-box;
-    border: 2px solid transparent;
+    background:
+      linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+      linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brass))) border-box;
+    border: 1px solid transparent;
   }
 }
 
-/* 移动端适配 */
 @media (max-width: 768px) {
   .mobile-optimized {
     @apply px-4 py-2;
   }
-  
+
   .mobile-card {
     @apply mb-4 last:mb-0;
   }
-  
+
   .mobile-grid {
     @apply grid-cols-1 gap-3;
   }
 }
 
-/* 深色模式偏好设置适配 */
-@media (prefers-color-scheme: dark) {
-  .auto-dark {
-    @apply dark:bg-gray-900 dark:text-white dark:border-gray-700;
+@keyframes pulse-energy {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.08);
+    filter: brightness(1.08);
   }
 }
 
-/* 动画定义 */
+@keyframes completion-bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -487,25 +645,17 @@
 }
 
 @keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(124, 58, 237, 0.3);
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 hsl(var(--brass) / 0.18);
   }
   50% {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
+    box-shadow: 0 0 0 8px hsl(var(--brass) / 0.08);
   }
 }
 
-.dark .animate-glow {
-  animation: glow-dark 2s ease-in-out infinite;
-}
-
-@keyframes glow-dark {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(167, 139, 250, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(167, 139, 250, 0.7);
-  }
+.completion-animation {
+  animation: completion-bounce 0.6s ease-out;
 }
 
 .animate-fade-in-up {
@@ -518,31 +668,4 @@
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
-}
-
-/* 深色模式下的表单元素优化 */
-.dark input, .dark textarea, .dark select {
-  @apply bg-input border-border text-foreground;
-}
-
-.dark input:focus, .dark textarea:focus, .dark select:focus {
-  @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
-}
-
-/* 深色模式下的代码块样式 */
-.dark pre, .dark code {
-  @apply bg-muted text-muted-foreground;
-}
-
-/* 深色模式下的表格样式 */
-.dark table {
-  @apply border-border;
-}
-
-.dark th, .dark td {
-  @apply border-border;
-}
-
-.dark th {
-  @apply bg-muted text-muted-foreground;
 }

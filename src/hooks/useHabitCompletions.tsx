@@ -10,6 +10,9 @@ export interface HabitCompletion {
   completed_at: string;
   energy_gained: number;
   notes?: string;
+  plan_id_snapshot?: string | null;
+  frequency_bucket?: string | null;
+  evidence_type?: string | null;
 }
 
 // 时间范围类型

@@ -13,16 +13,18 @@ import LanguageSelector from '@/components/LanguageSelector';
 
 interface SettingsCenterProps {
   onExportData: () => void;
-  onImportData: (data: any) => void;
+  onImportData: (data: unknown) => void;
   onClearAllData: () => void;
   onResetToDefaults: () => void;
+  onOpenLegacyWorkspace?: () => void;
 }
 
 const SettingsCenter: React.FC<SettingsCenterProps> = ({
   onExportData,
   onImportData,
   onClearAllData,
-  onResetToDefaults
+  onResetToDefaults,
+  onOpenLegacyWorkspace,
 }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -99,23 +101,22 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
   return (
     <div className="space-y-6 pt-6">
       <div className="text-center">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">{t('settings.title')}</h2>
-        <p className="text-gray-600 dark:text-gray-400">{t('settings.subtitle')}</p>
+        <h2 className="editorial-display mb-2 text-3xl font-semibold">{t('settings.title')}</h2>
+        <p className="text-muted-foreground">{t('settings.subtitle')}</p>
       </div>
 
-      {/* 通知设置 */}
-      <Card className="dark:bg-gray-800 dark:border-gray-700">
+      <Card className="surface-panel">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <Bell className="h-5 w-5 text-purple-600" />
-            <span className="dark:text-gray-100">{t('settings.notifications')}</span>
+            <Bell className="h-5 w-5 text-primary" />
+            <span>{t('settings.notifications')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <Label htmlFor="notifications" className="dark:text-gray-200">{t('settings.pushNotifications')}</Label>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.pushNotificationsDesc')}</p>
+              <Label htmlFor="notifications">{t('settings.pushNotifications')}</Label>
+              <p className="text-sm text-muted-foreground">{t('settings.pushNotificationsDesc')}</p>
             </div>
             <Switch
               id="notifications"
@@ -126,19 +127,18 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
         </CardContent>
       </Card>
 
-      {/* 界面设置 */}
-      <Card className="dark:bg-gray-800 dark:border-gray-700">
+      <Card className="surface-panel">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <Palette className="h-5 w-5 text-purple-600" />
-            <span className="dark:text-gray-100">{t('settings.interface')}</span>
+            <Palette className="h-5 w-5 text-primary" />
+            <span>{t('settings.interface')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <Label htmlFor="darkMode" className="dark:text-gray-200">{t('settings.darkMode')}</Label>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.darkModeDesc')}</p>
+              <Label htmlFor="darkMode">{t('settings.darkMode')}</Label>
+              <p className="text-sm text-muted-foreground">{t('settings.darkModeDesc')}</p>
             </div>
             <Switch
               id="darkMode"
@@ -149,8 +149,8 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
 
           <div className="flex items-center justify-between">
             <div>
-              <Label htmlFor="showProgress" className="dark:text-gray-200">{t('settings.showProgress')}</Label>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.showProgressDesc')}</p>
+              <Label htmlFor="showProgress">{t('settings.showProgress')}</Label>
+              <p className="text-sm text-muted-foreground">{t('settings.showProgressDesc')}</p>
             </div>
             <Switch
               id="showProgress"
@@ -161,8 +161,8 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
 
           <div className="flex items-center justify-between">
             <div>
-              <Label htmlFor="showStats" className="dark:text-gray-200">{t('settings.showStats')}</Label>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{t('settings.showStatsDesc')}</p>
+              <Label htmlFor="showStats">{t('settings.showStats')}</Label>
+              <p className="text-sm text-muted-foreground">{t('settings.showStatsDesc')}</p>
             </div>
             <Switch
               id="showStats"
@@ -173,12 +173,11 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
         </CardContent>
       </Card>
 
-      {/* 语言设置 */}
-      <Card className="dark:bg-gray-800 dark:border-gray-700">
+      <Card className="surface-panel">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <Globe className="h-5 w-5 text-purple-600" />
-            <span className="dark:text-gray-100">{t('settings.language')}</span>
+            <Globe className="h-5 w-5 text-primary" />
+            <span>{t('settings.language')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -186,12 +185,11 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
         </CardContent>
       </Card>
 
-      {/* 数据管理 */}
-      <Card className="dark:bg-gray-800 dark:border-gray-700">
+      <Card className="surface-panel">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <Database className="h-5 w-5 text-purple-600" />
-            <span className="dark:text-gray-100">{t('settings.dataManagement')}</span>
+            <Database className="h-5 w-5 text-primary" />
+            <span>{t('settings.dataManagement')}</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -199,7 +197,7 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
             <Button
               variant="outline"
               onClick={handleExport}
-              className="flex items-center space-x-2 dark:border-gray-600 dark:text-gray-200"
+              className="btn-subtle flex items-center space-x-2"
             >
               <Download className="h-4 w-4" />
               <span>{t('settings.exportData')}</span>
@@ -208,7 +206,7 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
             <Button
               variant="outline"
               onClick={handleImport}
-              className="flex items-center space-x-2 dark:border-gray-600 dark:text-gray-200"
+              className="btn-subtle flex items-center space-x-2"
             >
               <Upload className="h-4 w-4" />
               <span>{t('settings.importData')}</span>
@@ -217,7 +215,7 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
             <Button
               variant="outline"
               onClick={handleReset}
-              className="flex items-center space-x-2 dark:border-gray-600 dark:text-gray-200"
+              className="btn-subtle flex items-center space-x-2"
             >
               <RotateCcw className="h-4 w-4" />
               <span>{t('settings.resetDefault')}</span>
@@ -226,38 +224,65 @@ const SettingsCenter: React.FC<SettingsCenterProps> = ({
             <Button
               variant="outline"
               onClick={handleClearData}
-              className="flex items-center space-x-2 text-red-600 border-red-300 hover:bg-red-50 dark:text-red-400 dark:border-red-600 dark:hover:bg-red-900"
+              className="btn-quiet-danger flex items-center space-x-2"
             >
               <Trash2 className="h-4 w-4" />
               <span>{t('settings.clearAllData')}</span>
             </Button>
           </div>
 
-          <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg dark:bg-amber-900/20 dark:border-amber-700">
-            <p className="text-sm text-amber-800 dark:text-amber-200">
+          <div className="rounded-lg border border-[hsl(var(--brass)/0.2)] bg-[hsl(var(--brass)/0.08)] p-3">
+            <p className="text-sm text-foreground">
               <strong>{t('common.confirm')}：</strong> {t('settings.dataBackupTip')}
             </p>
           </div>
         </CardContent>
       </Card>
 
-      {/* 应用信息 */}
-      <Card className="dark:bg-gray-800 dark:border-gray-700">
+      <Card className="surface-panel-compat">
         <CardHeader>
-          <CardTitle className="dark:text-gray-100">{t('settings.appInfo')}</CardTitle>
+          <CardTitle>{t('settings.compatibilityLab')}</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="rounded-lg border border-dashed border-[hsl(var(--brass)/0.24)] bg-[hsl(var(--brass)/0.08)] p-4">
+            <div className="text-sm font-medium text-foreground">{t('settings.compatibilityNote')}</div>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {t('settings.compatibilityNoteDesc')}
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <div className="text-sm font-medium">{t('settings.rewardFirstMode')}</div>
+              <p className="text-sm text-muted-foreground">{t('settings.compatibilityLabDesc')}</p>
+            </div>
+            <Button
+              variant="outline"
+              onClick={() => onOpenLegacyWorkspace?.()}
+              disabled={!onOpenLegacyWorkspace}
+              className="btn-subtle"
+            >
+              {t('settings.openLegacyWorkspace')}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="surface-panel-muted">
+        <CardHeader>
+          <CardTitle>{t('settings.appInfo')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex justify-between">
-            <span className="text-gray-600 dark:text-gray-400">{t('settings.version')}</span>
-            <Badge variant="secondary">v2.9.0</Badge>
+            <span className="text-muted-foreground">{t('settings.version')}</span>
+            <Badge variant="secondary" className="status-chip status-chip--validating">{t('settings.vnextPreview')}</Badge>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600 dark:text-gray-400">{t('settings.lastUpdate')}</span>
-            <span className="text-sm dark:text-gray-300">2025-07-10</span>
+            <span className="text-muted-foreground">{t('settings.lastUpdate')}</span>
+            <span className="text-sm">2026-03-18</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600 dark:text-gray-400">{t('settings.developer')}</span>
-            <span className="text-sm dark:text-gray-300">梅炎栋</span>
+            <span className="text-muted-foreground">{t('settings.developer')}</span>
+            <span className="text-sm">梅炎栋</span>
           </div>
         </CardContent>
       </Card>
